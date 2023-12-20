@@ -39,7 +39,7 @@ public class BigPlayer extends GameObject {
 	
 	public void tick() {
 		x += speed;
-		y += gravity;
+		//y += gravity;
 		tickAnimation();						
 	}
 	
