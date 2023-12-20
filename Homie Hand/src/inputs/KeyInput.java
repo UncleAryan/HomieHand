@@ -1,0 +1,42 @@
+package inputs;
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import core.Panel;
+
+public class KeyInput implements KeyListener {
+	private Panel panel;
+	private boolean movingRight;
+	
+	public KeyInput(Panel panel) {
+		this.panel = panel;
+		movingRight = false;
+	}
+
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+			movingRight = false;
+			panel.getBigPlayer().setAction(3);
+			panel.getBigPlayer().setSpeed(-1);
+		}
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			movingRight = true;
+			panel.getBigPlayer().setAction(2);
+			panel.getBigPlayer().setSpeed(1);
+		}
+	}
+
+	public void keyReleased(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_LEFT && !movingRight) {
+			panel.getBigPlayer().setAction(1);
+			panel.getBigPlayer().setSpeed(0);
+		}
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT && movingRight) {
+			panel.getBigPlayer().setAction(0);
+			panel.getBigPlayer().setSpeed(0);
+		}
+	}
+	
+	public void keyTyped(KeyEvent e) { }
+}
