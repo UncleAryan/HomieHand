@@ -1,12 +1,9 @@
 package assets;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 import framework.GameObject;
-import framework.LevelHandler;
 import framework.LoadSave;
 
 public class BigPlayer extends GameObject {
