@@ -33,7 +33,7 @@ public class LevelHandler {
 				int blue = (pixel) & 0xff;
 			
 				if(red == 255 && green == 255 && blue == 255) {
-					grass.add(new Grass(row * 32, col * 32, Grass.WIDTH, Grass.HEIGHT, "Grass")); 
+					grass.add(new Grass(row * 32, col * 32, Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, "Grass")); 
 				}
 			}
 		}

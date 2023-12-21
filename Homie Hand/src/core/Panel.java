@@ -7,26 +7,19 @@ import javax.swing.JPanel;
 
 import assets.BigPlayer;
 import framework.Camera;
-import framework.CollisionHandler;
+import framework.Constants;
+import framework.GameObjectHandler;
 import framework.LevelHandler;
 import inputs.KeyInput;
 import inputs.MouseInput;
 
 public class Panel extends JPanel implements Runnable {
-	public final static int DEFAULT_BLOCK_SIZE = 32;
-	public final static int SCALE = 2;
-	public final static int BLOCKS_IN_ROW = 26;
-	public final static int BLOCKS_IN_COL = 14;
-	public final static int BLOCK_SIZE = DEFAULT_BLOCK_SIZE * SCALE;
-	public final static int WIDTH = BLOCK_SIZE * BLOCKS_IN_ROW;
-	public final static int HEIGHT = BLOCK_SIZE * BLOCKS_IN_COL;
 	private MouseInput mouseInput;
 	private final int FPS = 120, TICKS = 200;
 	private Thread thread;
 	private BigPlayer bigPlayer;
 	private LevelHandler levelHandler;
-	private Camera camera;
-	private CollisionHandler collisionHandler;
+	private GameObjectHandler gameObjectHandler;
 	
 	// this is a comment
 	
@@ -40,31 +33,26 @@ public class Panel extends JPanel implements Runnable {
 	}
 	
 	public void loadGameObjects() {
+		gameObjectHandler = new GameObjectHandler();
 		levelHandler = new LevelHandler();
-		bigPlayer = new BigPlayer(200, 200, BigPlayer.WIDTH, BigPlayer.HEIGHT, "BigPlayer");
-		//camera = new Camera(0, 0);
-		collisionHandler = new CollisionHandler(this);
+		bigPlayer = new BigPlayer(200, 200, Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, "BigPlayer");
+		gameObjectHandler.addGameObject(bigPlayer);
 	}
 	
 	public void tick() {
-		bigPlayer.tick();
 		levelHandler.tick();
-		//camera.tick(bigPlayer);
-		collisionHandler.tick();
+		gameObjectHandler.tick();
 	}
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
-		//g.translate(camera.getX(), camera.getY());
 		
-		bigPlayer.render(g);
 		levelHandler.render(g);
-		
-		//g.translate(-camera.getX(), -camera.getY());
+		gameObjectHandler.render(g);
 	}
 	
 	public void run() {
+		this.requestFocus();
 		double timePerFrame = 1000000000 / FPS;
 		double timePerTick = 1000000000 / TICKS;
 		
@@ -117,7 +105,7 @@ public class Panel extends JPanel implements Runnable {
 	}
 	
 	private void setSize() {
-		setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		setPreferredSize(new Dimension(Constants.WIDTH, Constants.HEIGHT));
 		System.out.println("Width: " + WIDTH + " Height: " + HEIGHT);
 	}
 	

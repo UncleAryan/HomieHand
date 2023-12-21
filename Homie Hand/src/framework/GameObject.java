@@ -2,12 +2,16 @@ package framework;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.LinkedList;
 
 public abstract class GameObject {
 	protected int x, y;
+	protected int xSpeed, ySpeed;
 	protected int width, height;
 	protected int scale;
-	public static String ID;
+	protected String ID;
+	protected boolean falling;
+	protected boolean jumping;
 	
 	public GameObject(int x, int y, int width, int height, String ID) {
 		this.x = x;
@@ -15,15 +19,20 @@ public abstract class GameObject {
 		this.width = width * scale;
 		this.height = height * scale;
 		this.ID = ID;
-	}
-	
-	public Rectangle getBounds() {
-		return new Rectangle(x, y, width, height);
+		falling = false;
+		jumping = false;
 	}
     
 	public abstract void render(Graphics g);
-	public abstract void tick();
+	public abstract void tick(LinkedList<GameObject> gameObjects);
+	public abstract Rectangle getBounds();
 
+	public int getWidth() {
+		return width;
+	}
+	public int getHeight() {
+		return height;
+	}
 	public int getX() {
 		return x;
 	}
@@ -42,5 +51,30 @@ public abstract class GameObject {
 	
 	public String getID() {
 		return ID;
+	}
+	
+	public void setFalling(boolean falling) {
+		this.falling = falling;
+	}
+	public void setJumping(boolean jumping) {
+		this.jumping = jumping;
+	}
+	public boolean isFalling() {
+		return falling;
+	}
+	public boolean isJumping() {
+		return jumping;
+	}
+	public void setXSpeed(int speed) {
+		xSpeed = speed;
+	}
+	public void setYSpeed(int speed) {
+		ySpeed = speed;
+	}
+	public int getXSpeed() {
+		return xSpeed;
+	}
+	public int getYSpeed() {
+		return ySpeed;
 	}
 }

@@ -18,23 +18,23 @@ public class KeyInput implements KeyListener {
 		if(e.getKeyCode() == KeyEvent.VK_LEFT) {
 			movingRight = false;
 			panel.getBigPlayer().setAction(3);
-			panel.getBigPlayer().setSpeed(-1);
+			panel.getBigPlayer().setXSpeed(-1);
 		}
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			movingRight = true;
 			panel.getBigPlayer().setAction(2);
-			panel.getBigPlayer().setSpeed(1);
+			panel.getBigPlayer().setXSpeed(1);
 		}
 	}
 
 	public void keyReleased(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_LEFT && !movingRight) {
 			panel.getBigPlayer().setAction(1);
-			panel.getBigPlayer().setSpeed(0);
+			panel.getBigPlayer().setXSpeed(0);
 		}
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT && movingRight) {
 			panel.getBigPlayer().setAction(0);
-			panel.getBigPlayer().setSpeed(0);
+			panel.getBigPlayer().setXSpeed(0);
 		}
 	}
 	

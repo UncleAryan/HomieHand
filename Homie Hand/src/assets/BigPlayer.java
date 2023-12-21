@@ -1,7 +1,10 @@
 package assets;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.LinkedList;
 
 import framework.GameObject;
 import framework.LoadSave;
@@ -9,9 +12,7 @@ import framework.LoadSave;
 public class BigPlayer extends GameObject {
 	private BufferedImage[][] animations;
 	private int animationTick, animationIndex, animationSpeed;
-	private int width, height;
-	public static int WIDTH;
-	public static int HEIGHT;
+	private final int MAX_SPEED;
 	
 	/*
 	 * 0 = idle right
@@ -20,33 +21,48 @@ public class BigPlayer extends GameObject {
 	 * 3 = walking left
 	 */
 	private int action;
-	private int speed;
 	private int gravity;
+	private Rectangle bounds;
 	
 	public BigPlayer(int x, int y, int width, int height, String ID) {
 		super(x, y, width, height, ID);
-		this.width = 32;
-		this.height = 32;
+		MAX_SPEED = 2;
 		animationSpeed = 25;
 		scale = 4;
-		WIDTH = width * scale;
-		HEIGHT = height * scale;
 		action = 0; // starts off facing right idle
-		speed = 0;
 		gravity = 1;
+		this.width = width;
+		this.height = height;
+		bounds = new Rectangle(x, y, width * scale, height * scale);
+		
+		falling = true;
+		
 		loadAnimations();
 	}
 	
-	public void tick() {
-		x += speed;
-		//y += gravity;
+	public void tick(LinkedList<GameObject> gameObjects) {
+		x += xSpeed;
+		//y += ySpeed;
+		
+		if(falling) {
+			ySpeed += gravity;
+			
+			if(ySpeed > MAX_SPEED) {
+				ySpeed = MAX_SPEED;
+			}
+		}
 		tickAnimation();						
 	}
 	
-	public void render(Graphics g){
-		g.drawImage(animations[action][animationIndex], x, y, width*scale, height*scale, null);
+	public void render(Graphics g) {
+		g.drawImage(animations[action][animationIndex], x, y, width * scale, height * scale, null);
+		g.setColor(Color.BLUE);
+		g.drawRect(x, y, width * scale, height * scale);
 	}
 	
+	public Rectangle getBounds() {
+		return bounds;
+	}
 	private void tickAnimation() {
 		animationTick++;
 		if(animationTick >= animationSpeed) {
@@ -67,10 +83,6 @@ public class BigPlayer extends GameObject {
 				animations[row][col] = image.getSubimage(col * width, row * height, 32, 32);
 			}
 		}
-	}
-	
-	public void setSpeed(int speed) {
-		this.speed = speed;
 	}
 	
 	public void setAction(int action) {
