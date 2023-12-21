@@ -10,8 +10,6 @@ public abstract class GameObject {
 	protected int width, height;
 	protected int scale;
 	protected String ID;
-	protected boolean falling;
-	protected boolean jumping;
 	
 	public GameObject(int x, int y, int width, int height, String ID) {
 		this.x = x;
@@ -19,8 +17,6 @@ public abstract class GameObject {
 		this.width = width * scale;
 		this.height = height * scale;
 		this.ID = ID;
-		falling = false;
-		jumping = false;
 	}
     
 	public abstract void render(Graphics g);
@@ -51,19 +47,6 @@ public abstract class GameObject {
 	
 	public String getID() {
 		return ID;
-	}
-	
-	public void setFalling(boolean falling) {
-		this.falling = falling;
-	}
-	public void setJumping(boolean jumping) {
-		this.jumping = jumping;
-	}
-	public boolean isFalling() {
-		return falling;
-	}
-	public boolean isJumping() {
-		return jumping;
 	}
 	public void setXSpeed(int speed) {
 		xSpeed = speed;
