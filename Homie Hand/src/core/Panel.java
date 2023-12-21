@@ -2,11 +2,9 @@ package core;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
-
 import javax.swing.JPanel;
 
 import assets.BigPlayer;
-import framework.Camera;
 import framework.Constants;
 import framework.GameObjectHandler;
 import framework.LevelHandler;
@@ -21,8 +19,6 @@ public class Panel extends JPanel implements Runnable {
 	private LevelHandler levelHandler;
 	private GameObjectHandler gameObjectHandler;
 	
-	// this is a comment
-	
 	public Panel() {
 		setSize();
 		loadInputs();
@@ -34,20 +30,18 @@ public class Panel extends JPanel implements Runnable {
 	
 	public void loadGameObjects() {
 		gameObjectHandler = new GameObjectHandler();
-		levelHandler = new LevelHandler();
+		levelHandler = new LevelHandler(this);
 		bigPlayer = new BigPlayer(200, 200, Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, "BigPlayer");
 		gameObjectHandler.addGameObject(bigPlayer);
 	}
 	
 	public void tick() {
-		levelHandler.tick();
 		gameObjectHandler.tick();
 	}
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		levelHandler.render(g);
 		gameObjectHandler.render(g);
 	}
 	
@@ -106,14 +100,13 @@ public class Panel extends JPanel implements Runnable {
 	
 	private void setSize() {
 		setPreferredSize(new Dimension(Constants.WIDTH, Constants.HEIGHT));
-		System.out.println("Width: " + WIDTH + " Height: " + HEIGHT);
 	}
 	
 	public BigPlayer getBigPlayer() {
 		return bigPlayer;
 	}
 	
-	public LevelHandler getLevelHandler() {
-		return levelHandler;
+	public GameObjectHandler getGameObjectHandler() {
+		return gameObjectHandler;
 	}
 }

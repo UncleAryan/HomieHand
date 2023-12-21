@@ -1,5 +1,6 @@
 package assets;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -28,6 +29,8 @@ public class Grass extends GameObject {
 	
 	public void render(Graphics g) {
 		g.drawImage(grass, x, y, width, height, null);
+		g.setColor(Color.BLUE);
+		g.drawRect(x, y, width * scale, height * scale);
 	}
 	
 	public Rectangle getBounds() {

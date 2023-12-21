@@ -1,27 +1,16 @@
 package framework;
 
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 import assets.Grass;
+import core.Panel;
 
 public class LevelHandler {
-	public static ArrayList<GameObject> blocks;
-	public static ArrayList<Grass> grass;
+	private Panel panel;
 	
-	public LevelHandler() {
-		blocks = new ArrayList<>();
-		grass = new ArrayList<>();
+	public LevelHandler(Panel panel) {
+		this.panel = panel;
 		loadLevel(LoadSave.getSpriteSheet(LoadSave.LEVEL_ONE));
-	}
-	
-	public ArrayList<Grass> getGrass(){
-		return grass;
-	}
-	
-	public ArrayList<GameObject> getBlocks(){
-		return blocks;
 	}
 	
 	private void loadLevel(BufferedImage level) {
@@ -33,19 +22,9 @@ public class LevelHandler {
 				int blue = (pixel) & 0xff;
 			
 				if(red == 255 && green == 255 && blue == 255) {
-					grass.add(new Grass(row * 32, col * 32, Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, "Grass")); 
+					panel.getGameObjectHandler().addGameObject(new Grass(row * Constants.DEFAULT_GAMEOBJECT_WIDTH, col * Constants.DEFAULT_GAMEOBJECT_HEIGHT, Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, "Grass")); 
 				}
 			}
 		}
-	}
-
-	public void render(Graphics g) {
-		for(int i = 0; i < grass.size(); i++) {
-			grass.get(i).render(g);
-		}
-	}
-	
-	public void tick() {
-		
 	}
 }

@@ -26,7 +26,7 @@ public class BigPlayer extends GameObject {
 	
 	public BigPlayer(int x, int y, int width, int height, String ID) {
 		super(x, y, width, height, ID);
-		MAX_SPEED = 2;
+		MAX_SPEED = 1;
 		animationSpeed = 25;
 		scale = 4;
 		action = 0; // starts off facing right idle
@@ -42,7 +42,7 @@ public class BigPlayer extends GameObject {
 	
 	public void tick(LinkedList<GameObject> gameObjects) {
 		x += xSpeed;
-		//y += ySpeed;
+		y += ySpeed;
 		
 		if(falling) {
 			ySpeed += gravity;
@@ -51,7 +51,22 @@ public class BigPlayer extends GameObject {
 				ySpeed = MAX_SPEED;
 			}
 		}
-		tickAnimation();						
+		updateBounds();
+		collisionDetection(gameObjects);
+		tickAnimation();
+	}
+	
+	public void updateBounds() {
+		bounds.x = x;
+		bounds.y = y;
+	}
+	
+	public void collisionDetection(LinkedList<GameObject> gameObjects) {
+		for(int i = 0; i < gameObjects.size(); i++) {
+			if(gameObjects.get(i).getID().equals("Grass") && getBounds().intersects(gameObjects.get(i).getBounds())) {
+				ySpeed = 0;
+			}
+		}
 	}
 	
 	public void render(Graphics g) {
