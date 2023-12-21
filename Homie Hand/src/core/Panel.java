@@ -28,6 +28,8 @@ public class Panel extends JPanel implements Runnable {
 	private Camera camera;
 	private CollisionHandler collisionHandler;
 	
+	// this is a comment
+	
 	public Panel() {
 		setSize();
 		loadInputs();
