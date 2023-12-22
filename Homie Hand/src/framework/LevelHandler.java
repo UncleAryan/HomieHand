@@ -22,7 +22,10 @@ public class LevelHandler {
 				int blue = (pixel) & 0xff;
 			
 				if(red == 255 && green == 255 && blue == 255) {
-					panel.getGameObjectHandler().addGameObject(new Grass(row * Constants.DEFAULT_GAMEOBJECT_WIDTH, col * Constants.DEFAULT_GAMEOBJECT_HEIGHT, Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, "Block")); 
+					panel.getGameObjectHandler().addGameObject(
+							new Grass(row * Constants.DEFAULT_GAMEOBJECT_WIDTH, col * Constants.DEFAULT_GAMEOBJECT_HEIGHT, 
+									Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, "Block")
+						); 
 				}
 			}
 		}

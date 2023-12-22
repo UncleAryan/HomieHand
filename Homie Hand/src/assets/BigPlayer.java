@@ -28,7 +28,7 @@ public class BigPlayer extends GameObject {
 	
 	public BigPlayer(int x, int y, int width, int height, String ID) {
 		super(x, y, width, height, ID);
-		animationTicker = new AnimationTicker(25);
+		animationTicker = new AnimationTicker(25, 9);
 		scale = 4;
 		action = 0; // starts off facing right idle
 		gravity = 1;

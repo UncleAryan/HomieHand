@@ -2,9 +2,11 @@ package core;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+
 import javax.swing.JPanel;
 
 import assets.BigPlayer;
+import assets.SmallPlayer;
 import framework.Constants;
 import framework.GameObjectHandler;
 import framework.LevelHandler;
@@ -16,6 +18,7 @@ public class Panel extends JPanel implements Runnable {
 	private final int FPS = 120, TICKS = 200;
 	private Thread thread;
 	private BigPlayer bigPlayer;
+	private SmallPlayer smallPlayer;
 	private LevelHandler levelHandler;
 	private GameObjectHandler gameObjectHandler;
 	
@@ -32,7 +35,9 @@ public class Panel extends JPanel implements Runnable {
 		gameObjectHandler = new GameObjectHandler();
 		levelHandler = new LevelHandler(this);
 		bigPlayer = new BigPlayer(200, 200, Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, "BigPlayer");
+		smallPlayer = new SmallPlayer(400, 200, Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, "SmallPlayer");
 		gameObjectHandler.addGameObject(bigPlayer);
+		gameObjectHandler.addGameObject(smallPlayer);
 	}
 	
 	public void tick() {
@@ -46,7 +51,6 @@ public class Panel extends JPanel implements Runnable {
 	}
 	
 	public void run() {
-		this.requestFocus();
 		double timePerFrame = 1000000000 / FPS;
 		double timePerTick = 1000000000 / TICKS;
 		

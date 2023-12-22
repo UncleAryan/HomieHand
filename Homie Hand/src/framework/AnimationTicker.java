@@ -2,9 +2,10 @@ package framework;
 
 public class AnimationTicker {
 	private int animationTick, animationIndex, animationSpeed;
-
-	public AnimationTicker(int speed) {
+	private int numColumes;
+	public AnimationTicker(int speed, int numColumes) {
 		animationSpeed = speed;
+		this.numColumes = numColumes;
 	}
 	
 	public void tickAnimation() {
@@ -12,7 +13,7 @@ public class AnimationTicker {
 		if(animationTick >= animationSpeed) {
 			animationTick = 0;
 			animationIndex++;
-			if(animationIndex >= 9) {
+			if(animationIndex >= numColumes) {
 				animationIndex = 0;
 			}
 		}
