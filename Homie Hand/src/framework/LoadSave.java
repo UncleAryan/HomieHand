@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 
 public class LoadSave {
 	public static final String BIGPLAYER_SPRITESHEET = "big_player_animations.png";
+	public static final String SMALLPLAYER_SPRITESHEET = "small_player_spritesheet.png";
 	public static final String BLOCK_SPRITESHEET = "block_spritesheet.png";
 	public static final String LEVEL_ONE = "level1.png";
 	

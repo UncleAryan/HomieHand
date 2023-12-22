@@ -6,13 +6,13 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
-import framework.Constants;
+import framework.AnimationTicker;
+import framework.CollisionHandler;
 import framework.GameObject;
 import framework.LoadSave;
 
 public class BigPlayer extends GameObject {
 	private BufferedImage[][] animations;
-	private int animationTick, animationIndex, animationSpeed;;
 	
 	/*
 	 * 0 = idle right
@@ -23,16 +23,19 @@ public class BigPlayer extends GameObject {
 	private int action;
 	private int gravity;
 	private Rectangle bounds;
+	private AnimationTicker animationTicker;
+	private CollisionHandler collisionHandler;
 	
 	public BigPlayer(int x, int y, int width, int height, String ID) {
 		super(x, y, width, height, ID);
-		animationSpeed = 25;
+		animationTicker = new AnimationTicker(25);
 		scale = 4;
 		action = 0; // starts off facing right idle
 		gravity = 1;
 		this.width = width;
 		this.height = height;
 		bounds = new Rectangle(x, y, width * scale, height * scale);
+		collisionHandler = new CollisionHandler();
 		loadAnimations();
 	}
 	
@@ -41,61 +44,18 @@ public class BigPlayer extends GameObject {
 		y += ySpeed;
 		ySpeed = gravity;
 		
-		collisionDetection(gameObjects);
-		tickAnimation();
+		collisionHandler.checkCollision(gameObjects, this);
+		animationTicker.tickAnimation();
 	}
 	
-	/*
-	 * Collision handling algorithm adapted from RedFlyer Coding on YouTube.
-	 */
-	private void collisionDetection(LinkedList<GameObject> gameObjects) {
-		// horizontal collision
-		bounds.x += xSpeed;
-		for(int i = 0; i < gameObjects.size(); i++) {
-			if(gameObjects.get(i).getID().equals("Grass") && bounds.intersects(gameObjects.get(i).getBounds())) {
-				bounds.x -= xSpeed;
-				while(!gameObjects.get(i).getBounds().intersects(bounds)) {
-					bounds.x += Math.signum(xSpeed);
-				}
-				bounds.x -= Math.signum(xSpeed);
-				xSpeed = 0;
-				x = bounds.x;
-			} 
-		}
-		
-		// vertical collision
-		bounds.y += ySpeed;
-		for(int i = 0; i < gameObjects.size(); i++) {
-			if(gameObjects.get(i).getID().equals("Grass") && bounds.intersects(gameObjects.get(i).getBounds())) {
-				bounds.y -= ySpeed;
-				while(!gameObjects.get(i).getBounds().intersects(bounds)) {
-					bounds.y += Math.signum(ySpeed);
-				}
-				bounds.y -= Math.signum(ySpeed);
-				ySpeed = 0;
-				y = bounds.y;
-			} 
-		}
-	}
-
 	public void render(Graphics g) {
-		g.drawImage(animations[action][animationIndex], x, y, width * scale, height * scale, null);
+		g.drawImage(animations[action][animationTicker.getAnimationIndex()], x, y, width * scale, height * scale, null);
 		g.setColor(Color.BLUE);
 		g.drawRect(x, y, width * scale, height * scale);
 	}
 	
 	public Rectangle getBounds() {
 		return bounds;
-	}
-	private void tickAnimation() {
-		animationTick++;
-		if(animationTick >= animationSpeed) {
-			animationTick = 0;
-			animationIndex++;
-			if(animationIndex >= 9) {
-				animationIndex = 0;
-			}
-		}
 	}
 	
 	private void loadAnimations() {
@@ -104,7 +64,7 @@ public class BigPlayer extends GameObject {
 		animations = new BufferedImage[4][9];
 		for(int row = 0; row < animations.length; row++) {
 			for(int col = 0; col < animations[row].length; col++) {
-				animations[row][col] = image.getSubimage(col * width, row * height, 32, 32);
+				animations[row][col] = image.getSubimage(col * width, row * height, width, height);
 			}
 		}
 	}
