@@ -16,12 +16,12 @@ public class KeyInput implements KeyListener {
 	}
 
 	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode() == KeyEvent.VK_LEFT && !panel.getBigPlayer().collisionLeft()) {
+		if(e.getKeyCode() == KeyEvent.VK_LEFT) {
 			movingRight = false;
 			panel.getBigPlayer().setAction(3);
 			panel.getBigPlayer().setXSpeed(-Constants.BIGPLAYER_XSPEED);
 		}
-		if(e.getKeyCode() == KeyEvent.VK_RIGHT && !panel.getBigPlayer().collisionRight()) {
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			movingRight = true;
 			panel.getBigPlayer().setAction(2);
 			panel.getBigPlayer().setXSpeed(Constants.BIGPLAYER_XSPEED);

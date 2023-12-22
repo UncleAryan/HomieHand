@@ -23,9 +23,6 @@ public class BigPlayer extends GameObject {
 	private int action;
 	private int gravity;
 	private Rectangle bounds;
-	private boolean collisionLeft;
-	private boolean collisionRight;
-	private boolean collisionBottom;
 	
 	public BigPlayer(int x, int y, int width, int height, String ID) {
 		super(x, y, width, height, ID);
@@ -36,9 +33,6 @@ public class BigPlayer extends GameObject {
 		this.width = width;
 		this.height = height;
 		bounds = new Rectangle(x, y, width * scale, height * scale);
-		collisionLeft = false;
-		collisionRight = false;
-		collisionBottom = false;
 		loadAnimations();
 	}
 	
@@ -51,6 +45,9 @@ public class BigPlayer extends GameObject {
 		tickAnimation();
 	}
 	
+	/*
+	 * Collision handling algorithm adapted from RedFlyer Coding on YouTube.
+	 */
 	private void collisionDetection(LinkedList<GameObject> gameObjects) {
 		// horizontal collision
 		bounds.x += xSpeed;
@@ -114,12 +111,5 @@ public class BigPlayer extends GameObject {
 	
 	public void setAction(int action) {
 		this.action = action;
-	}
-	
-	public boolean collisionLeft() {
-		return collisionLeft;
-	}
-	public boolean collisionRight() {
-		return collisionRight;
 	}
 }
