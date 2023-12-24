@@ -2,7 +2,6 @@ package assets;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.util.LinkedList;
 
 import framework.AnimationLoader;
@@ -19,7 +18,6 @@ public class BigPlayer extends GameObject {
 	 */
 	private int action;
 	private int gravity;
-	private Rectangle bounds;
 	private AnimationLoader animationLoader;
 	private CollisionHandler collisionHandler;
 	
@@ -28,7 +26,6 @@ public class BigPlayer extends GameObject {
 		animationLoader = new AnimationLoader(25);
 		action = 0; // starts off facing right idle
 		gravity = 1;
-		bounds = new Rectangle(x, y, scaledWidth, scaledHeight);
 		collisionHandler = new CollisionHandler();
 		animationLoader.loadAnimations(4, 9, originalWidth, originalHeight, LoadSave.BIGPLAYER_SPRITESHEET);
 	}
@@ -44,12 +41,8 @@ public class BigPlayer extends GameObject {
 	
 	public void render(Graphics g) {
 		g.drawImage(animationLoader.getAnimations()[action][animationLoader.getAnimationIndex()], x, y, scaledWidth, scaledHeight, null);
-		g.setColor(Color.BLUE);
-		g.drawRect(x, y, scaledWidth, scaledHeight);
-	}
-	
-	public Rectangle getBounds() {
-		return bounds;
+		
+		showBoundsOutline(g);
 	}
 	
 	public void setAction(int action) {

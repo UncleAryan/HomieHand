@@ -1,5 +1,6 @@
 package framework;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.LinkedList;
@@ -11,6 +12,7 @@ public abstract class GameObject {
 	protected int scaledWidth, scaledHeight;
 	protected int scale;
 	protected String ID;
+	protected Rectangle bounds;
 	
 	public GameObject(int x, int y, int width, int height, int scale, String ID) {
 		this.x = x;
@@ -21,12 +23,21 @@ public abstract class GameObject {
 		scaledWidth = width * scale;
 		scaledHeight = height * scale;
 		this.ID = ID;
+		bounds = new Rectangle(x, y, scaledWidth, scaledHeight);
 	}
     
+	public Rectangle getBounds() {
+		return bounds;
+	}
+	
 	public abstract void render(Graphics g);
 	public abstract void tick(LinkedList<GameObject> gameObjects);
-	public abstract Rectangle getBounds();
 
+	public void showBoundsOutline(Graphics g) {
+		g.setColor(Color.BLUE);
+		g.drawRect(x, y, scaledWidth, scaledHeight);
+	}
+	
 	public int getOriginalWidth() {
 		return originalWidth;
 	}

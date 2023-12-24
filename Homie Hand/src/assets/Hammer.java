@@ -2,7 +2,6 @@ package assets;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
@@ -30,6 +29,8 @@ public class Hammer extends GameObject {
 	    g2d.setTransform(rotatedImageInstance);
 	    g2d.drawImage(image, x, y, scaledWidth, scaledHeight, null);
 	    g2d.setTransform(resetImage);
+	    
+	    showBoundsOutline(g);
 	}
 
 	public void tick(LinkedList<GameObject> gameObjects) {
@@ -40,10 +41,6 @@ public class Hammer extends GameObject {
 		}
 		
 		x++;
-	}
-
-	public Rectangle getBounds() {
-		return null;
 	}
 
 }

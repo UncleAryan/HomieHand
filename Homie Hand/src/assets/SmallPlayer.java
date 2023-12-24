@@ -2,7 +2,6 @@ package assets;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.util.LinkedList;
 
 import framework.AnimationLoader;
@@ -14,7 +13,6 @@ import framework.LoadSave;
 public class SmallPlayer extends GameObject {
 	private AnimationLoader animationLoader;
 	private CollisionHandler collisionHandler;
-	private Rectangle bounds;
 	
 	/*
 	 * 0 = idle right
@@ -32,7 +30,6 @@ public class SmallPlayer extends GameObject {
 	public SmallPlayer(int x, int y, int width, int height, int scale, String ID) {
 		super(x, y, width, height, scale, ID);
 		animationLoader = new AnimationLoader(30);
-		bounds = new Rectangle(x, y, scaledWidth, scaledHeight);
 		action = 1; 
 		collisionHandler = new CollisionHandler();
 		gravity = 1;
@@ -45,8 +42,7 @@ public class SmallPlayer extends GameObject {
 
 	public void render(Graphics g) {
 		g.drawImage(animationLoader.getAnimations()[action][animationLoader.getAnimationIndex()], x, y, scaledWidth, scaledHeight, null);
-		g.setColor(Color.BLUE);
-		g.drawRect(x, y, scaledWidth, scaledHeight);
+		showBoundsOutline(g);
 	}
 
 	public void tick(LinkedList<GameObject> gameObjects) {
@@ -77,10 +73,6 @@ public class SmallPlayer extends GameObject {
 		if(onGround) {
 			MAX_JUMP = y - scaledHeight * 2;
 		}
-	}
-
-	public Rectangle getBounds() {
-		return bounds;
 	}
 	
 	public void setJumping(boolean jumping) {
