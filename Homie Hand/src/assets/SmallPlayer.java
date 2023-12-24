@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
-import framework.AnimationTicker;
+import framework.AnimationLoader;
 import framework.CollisionHandler;
 import framework.GameObject;
 import framework.LoadSave;
@@ -15,8 +15,7 @@ import framework.LoadSave;
  * Add jumping
  */
 public class SmallPlayer extends GameObject {
-	private BufferedImage[][] animations;
-	private AnimationTicker animationTicker;
+	private AnimationLoader animationLoader;
 	private CollisionHandler collisionHandler;
 	private Rectangle bounds;
 	
@@ -35,17 +34,17 @@ public class SmallPlayer extends GameObject {
 		this.width = width;
 		this.height = height;
 		scale = 4;
-		animationTicker = new AnimationTicker(30, 19);
+		animationLoader = new AnimationLoader(30);
 		bounds = new Rectangle(x, y, width * scale, height * scale);
 		action = 1; // starts off jumping right
 		collisionHandler = new CollisionHandler();
 		gravity = 1;
 		
-		loadAnimations();
+		animationLoader.loadAnimations(4, 19, width, height, LoadSave.SMALLPLAYER_SPRITESHEET);
 	}
 
 	public void render(Graphics g) {
-		g.drawImage(animations[action][animationTicker.getAnimationIndex()], x, y, width * scale, height * scale, null);
+		g.drawImage(animationLoader.getAnimations()[action][animationLoader.getAnimationIndex()], x, y, width * scale, height * scale, null);
 		g.setColor(Color.BLUE);
 		g.drawRect(x, y, width * scale, height * scale);
 	}
@@ -56,22 +55,10 @@ public class SmallPlayer extends GameObject {
 		ySpeed = gravity;
 		
 		collisionHandler.checkCollision(gameObjects, this);
-		animationTicker.tickAnimation();
+		animationLoader.tickAnimation();
 	}
 
 	public Rectangle getBounds() {
 		return bounds;
 	}
-	
-	private void loadAnimations() {
-		BufferedImage image = LoadSave.getSpriteSheet(LoadSave.SMALLPLAYER_SPRITESHEET);
-		
-		animations = new BufferedImage[2][19];
-		for(int row = 0; row < animations.length; row++) {
-			for(int col = 0; col < animations[row].length; col++) {
-				animations[row][col] = image.getSubimage(col * width, row * height, 32, 32);
-			}
-		}
-	}
-
 }
