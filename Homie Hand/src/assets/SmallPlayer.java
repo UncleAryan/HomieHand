@@ -29,13 +29,10 @@ public class SmallPlayer extends GameObject {
 	public static boolean onGround;
 	private int jumpSpeed;
 	
-	public SmallPlayer(int x, int y, int width, int height, String ID) {
-		super(x, y, width, height, ID);
-		this.width = width;
-		this.height = height;
-		scale = 2;
+	public SmallPlayer(int x, int y, int width, int height, int scale, String ID) {
+		super(x, y, width, height, scale, ID);
 		animationLoader = new AnimationLoader(30);
-		bounds = new Rectangle(x, y, width * scale, height * scale);
+		bounds = new Rectangle(x, y, scaledWidth, scaledHeight);
 		action = 1; 
 		collisionHandler = new CollisionHandler();
 		gravity = 1;
@@ -43,13 +40,13 @@ public class SmallPlayer extends GameObject {
 		onGround = false;
 		MAX_JUMP = y - height * 5;
 		jumpSpeed = 6;
-		animationLoader.loadAnimations(4, 19, width, height, LoadSave.SMALLPLAYER_SPRITESHEET);
+		animationLoader.loadAnimations(4, 19, originalWidth, originalHeight, LoadSave.SMALLPLAYER_SPRITESHEET);
 	}
 
 	public void render(Graphics g) {
-		g.drawImage(animationLoader.getAnimations()[action][animationLoader.getAnimationIndex()], x, y, width * scale, height * scale, null);
+		g.drawImage(animationLoader.getAnimations()[action][animationLoader.getAnimationIndex()], x, y, scaledWidth, scaledHeight, null);
 		g.setColor(Color.BLUE);
-		g.drawRect(x, y, width * scale, height * scale);
+		g.drawRect(x, y, scaledWidth, scaledHeight);
 	}
 
 	public void tick(LinkedList<GameObject> gameObjects) {
@@ -78,7 +75,7 @@ public class SmallPlayer extends GameObject {
 		animationLoader.tickAnimation();
 		
 		if(onGround) {
-			MAX_JUMP = y - height * 5;
+			MAX_JUMP = y - scaledHeight * 2;
 		}
 	}
 

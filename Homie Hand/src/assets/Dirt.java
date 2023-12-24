@@ -13,13 +13,10 @@ public class Dirt extends GameObject {
 	private BufferedImage dirt;
 	private Rectangle bounds;
 	
-	public Dirt(int x, int y, int width, int height, String ID) {
-		super(x, y, width, height, ID);
-		scale = 1;
-		this.width = width;
-		this.height = height;
+	public Dirt(int x, int y, int width, int height, int scale, String ID) {
+		super(x, y, width, height, scale, ID);
 		dirt = LoadSave.getSpriteSheet(LoadSave.BLOCK_SPRITESHEET).getSubimage(32, 0, width, height);
-		bounds = new Rectangle(x, y, width * scale, height * scale);
+		bounds = new Rectangle(x, y, scaledWidth, scaledHeight);
 	}
 	
 	public void tick(LinkedList<GameObject> gameObjects) {
@@ -27,9 +24,9 @@ public class Dirt extends GameObject {
 	}
 	
 	public void render(Graphics g) {
-		g.drawImage(dirt, x, y, width * scale, height * scale, null);
+		g.drawImage(dirt, x, y, scaledWidth, scaledHeight, null);
 		g.setColor(Color.BLUE);
-		g.drawRect(x, y, width * scale, height * scale);
+		g.drawRect(x, y, scaledWidth, scaledHeight);
 	}
 	
 	public Rectangle getBounds() {

@@ -10,6 +10,7 @@ public class LoadSave {
 	public static final String SMALLPLAYER_SPRITESHEET = "small_player_animation.png";
 	public static final String BLOCK_SPRITESHEET = "block_spritesheet.png";
 	public static final String LEVEL_ONE = "level1.png";
+	public static final String HAMMER = "hammer.png";
 	
 	public static BufferedImage getSpriteSheet(String file) {
 		BufferedImage image = null;

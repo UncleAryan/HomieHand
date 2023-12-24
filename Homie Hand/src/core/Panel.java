@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 import assets.BigPlayer;
+import assets.Hammer;
 import assets.SmallPlayer;
 import framework.Constants;
 import framework.GameObjectHandler;
@@ -34,10 +35,11 @@ public class Panel extends JPanel implements Runnable {
 	public void loadGameObjects() {
 		gameObjectHandler = new GameObjectHandler();
 		levelHandler = new LevelHandler(this);
-		bigPlayer = new BigPlayer(200, 200, Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, "BigPlayer");
-		smallPlayer = new SmallPlayer(400, 200, Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, "SmallPlayer");
+		bigPlayer = new BigPlayer(200, 200, Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, 4, "BigPlayer");
+		smallPlayer = new SmallPlayer(400, 200, Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, 2, "SmallPlayer");
 		gameObjectHandler.addGameObject(bigPlayer);
 		gameObjectHandler.addGameObject(smallPlayer);
+		gameObjectHandler.addGameObject(new Hammer(0, 100, Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, 2, "Hammer"));
 	}
 	
 	public void tick() {
@@ -97,7 +99,7 @@ public class Panel extends JPanel implements Runnable {
 	}
 	private void loadInputs() {
 		addKeyListener(new KeyInput(this));
-	    mouseInput = new MouseInput();
+	    mouseInput = new MouseInput(this);
 		addMouseListener(mouseInput);
 		addMouseMotionListener(mouseInput);
 	}

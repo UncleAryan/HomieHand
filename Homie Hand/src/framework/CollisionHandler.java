@@ -4,7 +4,11 @@ import java.util.LinkedList;
 
 import assets.SmallPlayer;
 
+/*
+ * Will handle all collisions in game.
+ */
 public class CollisionHandler {
+	
 	public CollisionHandler() {
 		
 	}
@@ -12,37 +16,37 @@ public class CollisionHandler {
 	/*
 	 * Collision handling algorithm adapted from RedFlyer Coding on YouTube.
 	 */
-	public void checkCollision(LinkedList<GameObject> gameObjects, GameObject player) {
+	public void checkCollision(LinkedList<GameObject> gameObjects, GameObject objectColliding) {
 		// horizontal collision
-		player.getBounds().x += player.getXSpeed();
+		objectColliding.getBounds().x += objectColliding.getXSpeed();
 		for(int i = 0; i < gameObjects.size(); i++) {
-			if(gameObjects.get(i).getID().equals("Block") && player.getBounds().intersects(gameObjects.get(i).getBounds())) {
-				player.getBounds().x -= player.getXSpeed();
-				while(!gameObjects.get(i).getBounds().intersects(player.getBounds())) {
-					player.getBounds().x += Math.signum(player.getXSpeed());
+			if(gameObjects.get(i).getID().equals("Block") && objectColliding.getBounds().intersects(gameObjects.get(i).getBounds())) {
+				objectColliding.getBounds().x -= objectColliding.getXSpeed();
+				while(!gameObjects.get(i).getBounds().intersects(objectColliding.getBounds())) {
+					objectColliding.getBounds().x += Math.signum(objectColliding.getXSpeed());
 				}
-				player.getBounds().x -= Math.signum(player.getXSpeed());
-				player.setXSpeed(0);
-				player.setX(player.getBounds().x);
+				objectColliding.getBounds().x -= Math.signum(objectColliding.getXSpeed());
+				objectColliding.setXSpeed(0);
+				objectColliding.setX(objectColliding.getBounds().x);
 			} 
 		}
 		
 		// vertical collision
-		player.getBounds().y += player.getYSpeed();
+		objectColliding.getBounds().y += objectColliding.getYSpeed();
 		for(int i = 0; i < gameObjects.size(); i++) {
-			if(gameObjects.get(i).getID().equals("Block") && player.getBounds().intersects(gameObjects.get(i).getBounds())) {
-				player.getBounds().y -= player.getYSpeed();
-				while(!gameObjects.get(i).getBounds().intersects(player.getBounds())) {
-					player.getBounds().y += Math.signum(player.getYSpeed());
-					if(player.getID().equals("SmallPlayer")) {
+			if(gameObjects.get(i).getID().equals("Block") && objectColliding.getBounds().intersects(gameObjects.get(i).getBounds())) {
+				objectColliding.getBounds().y -= objectColliding.getYSpeed();
+				while(!gameObjects.get(i).getBounds().intersects(objectColliding.getBounds())) {
+					objectColliding.getBounds().y += Math.signum(objectColliding.getYSpeed());
+					if(objectColliding.getID().equals("SmallPlayer")) {
 						SmallPlayer.onGround = true;
 					} else {
 						SmallPlayer.onGround = false;
 					}
 				}
-				player.getBounds().y -= Math.signum(player.getYSpeed());
-				player.setYSpeed(0);
-				player.setY(player.getBounds().y);
+				objectColliding.getBounds().y -= Math.signum(objectColliding.getYSpeed());
+				objectColliding.setYSpeed(0);
+				objectColliding.setY(objectColliding.getBounds().y);
 				
 			} 
 		}

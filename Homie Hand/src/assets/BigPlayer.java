@@ -23,17 +23,14 @@ public class BigPlayer extends GameObject {
 	private AnimationLoader animationLoader;
 	private CollisionHandler collisionHandler;
 	
-	public BigPlayer(int x, int y, int width, int height, String ID) {
-		super(x, y, width, height, ID);
+	public BigPlayer(int x, int y, int width, int height, int scale, String ID) {
+		super(x, y, width, height, scale, ID);
 		animationLoader = new AnimationLoader(25);
-		scale = 4;
 		action = 0; // starts off facing right idle
 		gravity = 1;
-		this.width = width;
-		this.height = height;
-		bounds = new Rectangle(x, y, width * scale, height * scale);
+		bounds = new Rectangle(x, y, scaledWidth, scaledHeight);
 		collisionHandler = new CollisionHandler();
-		animationLoader.loadAnimations(4, 9, width, height, LoadSave.BIGPLAYER_SPRITESHEET);
+		animationLoader.loadAnimations(4, 9, originalWidth, originalHeight, LoadSave.BIGPLAYER_SPRITESHEET);
 	}
 	
 	public void tick(LinkedList<GameObject> gameObjects) {
@@ -46,9 +43,9 @@ public class BigPlayer extends GameObject {
 	}
 	
 	public void render(Graphics g) {
-		g.drawImage(animationLoader.getAnimations()[action][animationLoader.getAnimationIndex()], x, y, width * scale, height * scale, null);
+		g.drawImage(animationLoader.getAnimations()[action][animationLoader.getAnimationIndex()], x, y, scaledWidth, scaledHeight, null);
 		g.setColor(Color.BLUE);
-		g.drawRect(x, y, width * scale, height * scale);
+		g.drawRect(x, y, scaledWidth, scaledHeight);
 	}
 	
 	public Rectangle getBounds() {

@@ -24,7 +24,7 @@ public class LevelHandler {
 				if(red == 255 && green == 255 && blue == 255) {
 					panel.getGameObjectHandler().addGameObject(
 							new Grass(row * Constants.DEFAULT_GAMEOBJECT_WIDTH, col * Constants.DEFAULT_GAMEOBJECT_HEIGHT, 
-									Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, "Block")
+									Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, 1, "Block")
 						); 
 				}
 			}

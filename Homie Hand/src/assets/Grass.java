@@ -11,16 +11,12 @@ import framework.LoadSave;
 
 public class Grass extends GameObject {
 	private BufferedImage grass;
-	private int width, height;
 	private Rectangle bounds;
 	
-	public Grass(int x, int y, int width, int height, String ID) {
-		super(x, y, width, height, ID);
-		scale = 1;
-		this.width = width * scale;
-		this.height = height * scale;
+	public Grass(int x, int y, int width, int height, int scale, String ID) {
+		super(x, y, width, height, scale, ID);
 		grass = LoadSave.getSpriteSheet(LoadSave.BLOCK_SPRITESHEET).getSubimage(0, 0, width, height);
-		bounds = new Rectangle(x, y, width * scale, height * scale);
+		bounds = new Rectangle(x, y, scaledWidth, scaledHeight);
 	}
 	
 	public void tick(LinkedList<GameObject> gameObjects) {
@@ -28,9 +24,9 @@ public class Grass extends GameObject {
 	}
 	
 	public void render(Graphics g) {
-		g.drawImage(grass, x, y, width, height, null);
+		g.drawImage(grass, x, y, scaledWidth, scaledHeight, null);
 		g.setColor(Color.BLUE);
-		g.drawRect(x, y, width * scale, height * scale);
+		g.drawRect(x, y, scaledWidth, scaledHeight);
 	}
 	
 	public Rectangle getBounds() {

@@ -7,15 +7,19 @@ import java.util.LinkedList;
 public abstract class GameObject {
 	protected int x, y;
 	protected int xSpeed, ySpeed;
-	protected int width, height;
+	protected int originalWidth, originalHeight;
+	protected int scaledWidth, scaledHeight;
 	protected int scale;
 	protected String ID;
 	
-	public GameObject(int x, int y, int width, int height, String ID) {
+	public GameObject(int x, int y, int width, int height, int scale, String ID) {
 		this.x = x;
 		this.y = y;
-		this.width = width * scale;
-		this.height = height * scale;
+		originalWidth = width;
+		originalHeight = height;
+		this.scale = scale;
+		scaledWidth = width * scale;
+		scaledHeight = height * scale;
 		this.ID = ID;
 	}
     
@@ -23,12 +27,19 @@ public abstract class GameObject {
 	public abstract void tick(LinkedList<GameObject> gameObjects);
 	public abstract Rectangle getBounds();
 
-	public int getWidth() {
-		return width;
+	public int getOriginalWidth() {
+		return originalWidth;
 	}
-	public int getHeight() {
-		return height;
+	public int getOrignialHeight() {
+		return originalHeight;
 	}
+	public int getScaledWidth() {
+		return scaledWidth;
+	}
+	public int getScaledHeight() {
+		return scaledHeight;
+	}
+	
 	public int getX() {
 		return x;
 	}
