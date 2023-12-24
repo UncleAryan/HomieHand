@@ -2,6 +2,8 @@ package framework;
 
 import java.util.LinkedList;
 
+import assets.SmallPlayer;
+
 public class CollisionHandler {
 	public CollisionHandler() {
 		
@@ -32,10 +34,16 @@ public class CollisionHandler {
 				player.getBounds().y -= player.getYSpeed();
 				while(!gameObjects.get(i).getBounds().intersects(player.getBounds())) {
 					player.getBounds().y += Math.signum(player.getYSpeed());
+					if(player.getID().equals("SmallPlayer")) {
+						SmallPlayer.onGround = true;
+					} else {
+						SmallPlayer.onGround = false;
+					}
 				}
 				player.getBounds().y -= Math.signum(player.getYSpeed());
 				player.setYSpeed(0);
 				player.setY(player.getBounds().y);
+				
 			} 
 		}
 	}

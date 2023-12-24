@@ -110,6 +110,10 @@ public class Panel extends JPanel implements Runnable {
 		return bigPlayer;
 	}
 	
+	public SmallPlayer getSmallPlayer() {
+		return smallPlayer;
+	}
+	
 	public GameObjectHandler getGameObjectHandler() {
 		return gameObjectHandler;
 	}

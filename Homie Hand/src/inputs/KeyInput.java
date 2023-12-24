@@ -3,6 +3,7 @@ package inputs;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import assets.SmallPlayer;
 import core.Panel;
 import framework.Constants;
 
@@ -25,6 +26,9 @@ public class KeyInput implements KeyListener {
 			movingRight = true;
 			panel.getBigPlayer().setAction(2);
 			panel.getBigPlayer().setXSpeed(Constants.BIGPLAYER_XSPEED);
+		}
+		if(e.getKeyCode() == KeyEvent.VK_SPACE && SmallPlayer.onGround) {
+			panel.getSmallPlayer().setJumping(true);
 		}
 	}
 
