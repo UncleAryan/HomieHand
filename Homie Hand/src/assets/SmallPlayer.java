@@ -11,6 +11,9 @@ import framework.CollisionHandler;
 import framework.GameObject;
 import framework.LoadSave;
 
+/*
+ * Add jumping
+ */
 public class SmallPlayer extends GameObject {
 	private BufferedImage[][] animations;
 	private AnimationTicker animationTicker;
