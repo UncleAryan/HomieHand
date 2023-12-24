@@ -10,9 +10,7 @@ import framework.CollisionHandler;
 import framework.GameObject;
 import framework.LoadSave;
 
-/*
- * Add jumping
- */
+
 public class SmallPlayer extends GameObject {
 	private AnimationLoader animationLoader;
 	private CollisionHandler collisionHandler;
@@ -21,8 +19,8 @@ public class SmallPlayer extends GameObject {
 	/*
 	 * 0 = idle right
 	 * 1 = idle left
-	 * 2 = walking right
-	 * 3 = walking left
+	 * 2 = jumping right
+	 * 3 = jumping left
 	 */
 	private int action;
 	private int gravity;
@@ -38,13 +36,13 @@ public class SmallPlayer extends GameObject {
 		scale = 2;
 		animationLoader = new AnimationLoader(30);
 		bounds = new Rectangle(x, y, width * scale, height * scale);
-		action = 1; // starts off jumping right
+		action = 1; 
 		collisionHandler = new CollisionHandler();
 		gravity = 1;
 		jumping = false;
 		onGround = false;
 		MAX_JUMP = y - height * 5;
-		jumpSpeed = 3;
+		jumpSpeed = 6;
 		animationLoader.loadAnimations(4, 19, width, height, LoadSave.SMALLPLAYER_SPRITESHEET);
 	}
 
@@ -60,16 +58,21 @@ public class SmallPlayer extends GameObject {
 		ySpeed = gravity;
 		
 		if(jumping) {
-			for(int i = 0; i <= jumpSpeed; i++) {
-				ySpeed = -i;
+			action = 3;
+			if(animationLoader.getAnimationIndex() == 11) {
+				animationLoader.setAnimationSpeed(15);
 				
-			}
-			if(y + ySpeed <= MAX_JUMP) {
-				jumping = false;
+				for(int i = 1; i <= jumpSpeed; i++) {
+					ySpeed = -i;	
+					if(y + ySpeed <= MAX_JUMP) {
+						jumping = false;
+						action = 1;
+					}
+				}
+				
+				animationLoader.setAnimationSpeed(30);
 			}
 		} 
-		
-		
 		
 		collisionHandler.checkCollision(gameObjects, this);
 		animationLoader.tickAnimation();

@@ -42,4 +42,8 @@ public class AnimationLoader {
 		return animations;
 	}
 	
+	public void setAnimationSpeed(int speed) {
+		animationSpeed = speed;
+	}
+	
 }
