@@ -19,6 +19,8 @@ public class Hammer extends GameObject {
 	private BigPlayer bigPlayer;
 	private boolean throwHammer;
 	private double spinDirection;
+	private int mouseX, mouseY;
+	private int gravity;
 	
 	public Hammer(int x, int y, int width, int height, int scale, String ID, BigPlayer bigPlayer) {
 		super(x, y, width, height, scale, ID);
@@ -27,6 +29,9 @@ public class Hammer extends GameObject {
 		this.bigPlayer = bigPlayer;
 		throwHammer = false;
 		spinDirection = 1;
+		mouseX = 1;
+		mouseY = 1;
+		gravity = 1;
 	}
 
 	public void render(Graphics g) {
@@ -39,7 +44,7 @@ public class Hammer extends GameObject {
 	    
 	    showBoundsOutline(g);
 	}
-
+	
 	public void tick(LinkedList<GameObject> gameObjects) {
 		if(throwHammer) {
 			angle += 0.05 * spinDirection;
@@ -48,6 +53,9 @@ public class Hammer extends GameObject {
 				angle = 0;
 			}
 			x += xSpeed;
+			y += ySpeed;
+			
+			ySpeed = -1;
 		} else {
 			x = bigPlayer.getX() + bigPlayer.getScaledWidth()/4;
 			y = (bigPlayer.getY() + bigPlayer.getScaledHeight()/3);
@@ -60,6 +68,7 @@ public class Hammer extends GameObject {
 				angle = -45;
 				xSpeed = -2;
 				spinDirection = -1;
+				
 			}
 		}
 		
@@ -67,6 +76,14 @@ public class Hammer extends GameObject {
 			throwHammer = false;
 			resetPosition();
 		}
+	}
+	
+	public void setMouseX(int mouseX) {
+		this.mouseX = mouseX;
+	}
+	
+	public void setMouseY(int mouseY) {
+		this.mouseY = mouseY;
 	}
 	
 	public void throwHammer() {

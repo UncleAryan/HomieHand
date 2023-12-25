@@ -21,6 +21,7 @@ public class BigPlayer extends GameObject {
 	private CollisionHandler collisionHandler;
 	private Hammer hammer;
 	
+	
 	public BigPlayer(int x, int y, int width, int height, int scale, String ID) {
 		super(x, y, width, height, scale, ID);
 		animationLoader = new AnimationLoader(25);
@@ -29,6 +30,7 @@ public class BigPlayer extends GameObject {
 		collisionHandler = new CollisionHandler();
 		animationLoader.loadAnimations(4, 9, originalWidth, originalHeight, LoadSave.BIGPLAYER_SPRITESHEET);
 		hammer = new Hammer(x, y, width, height, 2, "Hammer", this);
+		
 	}
 	
 	public void tick(LinkedList<GameObject> gameObjects) {

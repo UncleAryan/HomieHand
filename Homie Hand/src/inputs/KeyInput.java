@@ -30,6 +30,9 @@ public class KeyInput implements KeyListener {
 		if(e.getKeyCode() == KeyEvent.VK_SPACE && SmallPlayer.onGround) {
 			panel.getSmallPlayer().setJumping(true);
 		}
+		if(e.getKeyCode() == KeyEvent.VK_UP) {
+			panel.getBigPlayer().getHammer().throwHammer();
+		}
 	}
 
 	public void keyReleased(KeyEvent e) {
