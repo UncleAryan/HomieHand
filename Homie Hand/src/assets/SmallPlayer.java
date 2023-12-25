@@ -1,6 +1,5 @@
 package assets;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
@@ -50,8 +49,24 @@ public class SmallPlayer extends GameObject {
 		y += ySpeed;
 		ySpeed = gravity;
 		
+		for(int i = 0; i < gameObjects.size(); i++) {
+			if(gameObjects.get(i).getID().equals("BigPlayer")) {
+				if(gameObjects.get(i).getX() < x) {
+					action = 1;
+				}
+				if(gameObjects.get(i).getX() > x) {
+					action = 0;
+				}
+			} 
+		}
+		
 		if(jumping) {
-			action = 3;
+			if(action == 1) {
+				action = 3;
+			} else {
+				action = 2;
+			}
+			
 			if(animationLoader.getAnimationIndex() == 11) {
 				animationLoader.setAnimationSpeed(15);
 				

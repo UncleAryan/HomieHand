@@ -6,6 +6,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
+import framework.Constants;
 import framework.GameObject;
 import framework.LoadSave;
 	
@@ -15,11 +16,15 @@ public class Hammer extends GameObject {
 	private AffineTransform resetImage;
 	private AffineTransform rotatedImageInstance;
 	private Graphics2D g2d;
+	private BigPlayer bigPlayer;
+	private boolean throwHammer;
 	
-	public Hammer(int x, int y, int width, int height, int scale, String ID) {
+	public Hammer(int x, int y, int width, int height, int scale, String ID, BigPlayer bigPlayer) {
 		super(x, y, width, height, scale, ID);
 		image = LoadSave.getSpriteSheet(LoadSave.HAMMER);
-		angle = 0;
+		angle = 45;
+		this.bigPlayer = bigPlayer;
+		throwHammer = false;
 	}
 
 	public void render(Graphics g) {
@@ -34,13 +39,34 @@ public class Hammer extends GameObject {
 	}
 
 	public void tick(LinkedList<GameObject> gameObjects) {
-		angle += 0.05;
-		
-		if(angle >= 360) {
-			angle = 0;
+		if(throwHammer) {
+			angle += 0.05;
+			
+			if(angle >= 360) {
+				angle = 0;
+			}
+			x++;
+		} else {
+			x = bigPlayer.getX() + bigPlayer.getScaledWidth()/4;
+			y = (bigPlayer.getY() + bigPlayer.getScaledHeight()/3);
 		}
 		
-		x++;
+		
+		
+		if(x > Constants.WIDTH) {
+			throwHammer = false;
+			resetPosition();
+		}
+	}
+	
+	public void throwHammer() {
+		throwHammer = true;
+	}
+	
+	public void resetPosition() {
+		x = bigPlayer.getX() + bigPlayer.getScaledWidth()/4;
+		y = (bigPlayer.getY() + bigPlayer.getScaledHeight()/3);
+		angle = 45;
 	}
 
 }

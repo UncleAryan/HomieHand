@@ -27,7 +27,7 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		
+		panel.getBigPlayer().getHammer().throwHammer();
 	}
 
 	public void mousePressed(MouseEvent e) {

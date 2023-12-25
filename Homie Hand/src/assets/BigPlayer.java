@@ -1,6 +1,5 @@
 package assets;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
@@ -20,6 +19,7 @@ public class BigPlayer extends GameObject {
 	private int gravity;
 	private AnimationLoader animationLoader;
 	private CollisionHandler collisionHandler;
+	private Hammer hammer;
 	
 	public BigPlayer(int x, int y, int width, int height, int scale, String ID) {
 		super(x, y, width, height, scale, ID);
@@ -28,12 +28,15 @@ public class BigPlayer extends GameObject {
 		gravity = 1;
 		collisionHandler = new CollisionHandler();
 		animationLoader.loadAnimations(4, 9, originalWidth, originalHeight, LoadSave.BIGPLAYER_SPRITESHEET);
+		hammer = new Hammer(x, y, width, height, 2, "Hammer", this);
 	}
 	
 	public void tick(LinkedList<GameObject> gameObjects) {
 		x += xSpeed;
 		y += ySpeed;
 		ySpeed = gravity;
+		
+		hammer.tick(gameObjects);
 		
 		collisionHandler.checkCollision(gameObjects, this);
 		animationLoader.tickAnimation();
@@ -42,10 +45,20 @@ public class BigPlayer extends GameObject {
 	public void render(Graphics g) {
 		g.drawImage(animationLoader.getAnimations()[action][animationLoader.getAnimationIndex()], x, y, scaledWidth, scaledHeight, null);
 		
+		hammer.render(g);
+		
 		showBoundsOutline(g);
 	}
 	
 	public void setAction(int action) {
 		this.action = action;
+	}
+	
+	public AnimationLoader getAnimationLoader() {
+		return animationLoader;
+	}
+	
+	public Hammer getHammer() {
+		return hammer;
 	}
 }
