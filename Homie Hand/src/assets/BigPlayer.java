@@ -61,4 +61,8 @@ public class BigPlayer extends GameObject {
 	public Hammer getHammer() {
 		return hammer;
 	}
+	
+	public int getAction() {
+		return action;
+	}
 }

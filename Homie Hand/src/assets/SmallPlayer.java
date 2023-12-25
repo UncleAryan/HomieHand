@@ -49,6 +49,19 @@ public class SmallPlayer extends GameObject {
 		y += ySpeed;
 		ySpeed = gravity;
 		
+		faceBigPlayer(gameObjects);
+		
+		if(jumping) {
+			performJump();
+		} 
+		
+		collisionHandler.checkCollision(gameObjects, this);
+		animationLoader.tickAnimation();
+		
+		updateMaxJump();
+	}
+	
+	public void faceBigPlayer(LinkedList<GameObject> gameObjects) {
 		for(int i = 0; i < gameObjects.size(); i++) {
 			if(gameObjects.get(i).getID().equals("BigPlayer")) {
 				if(gameObjects.get(i).getX() < x) {
@@ -59,32 +72,31 @@ public class SmallPlayer extends GameObject {
 				}
 			} 
 		}
+	}
+	
+	public void performJump() {
+		if(action == 1) {
+			action = 3;
+		} else {
+			action = 2;
+		}
 		
-		if(jumping) {
-			if(action == 1) {
-				action = 3;
-			} else {
-				action = 2;
+		if(animationLoader.getAnimationIndex() == 11) {
+			animationLoader.setAnimationSpeed(15);
+			
+			for(int i = 1; i <= jumpSpeed; i++) {
+				ySpeed = -i;	
+				if(y + ySpeed <= MAX_JUMP) {
+					jumping = false;
+					action = 1;
+				}
 			}
 			
-			if(animationLoader.getAnimationIndex() == 11) {
-				animationLoader.setAnimationSpeed(15);
-				
-				for(int i = 1; i <= jumpSpeed; i++) {
-					ySpeed = -i;	
-					if(y + ySpeed <= MAX_JUMP) {
-						jumping = false;
-						action = 1;
-					}
-				}
-				
-				animationLoader.setAnimationSpeed(30);
-			}
-		} 
-		
-		collisionHandler.checkCollision(gameObjects, this);
-		animationLoader.tickAnimation();
-		
+			animationLoader.setAnimationSpeed(30);
+		}
+	}
+	
+	public void updateMaxJump() {
 		if(onGround) {
 			MAX_JUMP = y - scaledHeight * 2;
 		}

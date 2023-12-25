@@ -18,6 +18,7 @@ public class Hammer extends GameObject {
 	private Graphics2D g2d;
 	private BigPlayer bigPlayer;
 	private boolean throwHammer;
+	private double spinDirection;
 	
 	public Hammer(int x, int y, int width, int height, int scale, String ID, BigPlayer bigPlayer) {
 		super(x, y, width, height, scale, ID);
@@ -25,6 +26,7 @@ public class Hammer extends GameObject {
 		angle = 45;
 		this.bigPlayer = bigPlayer;
 		throwHammer = false;
+		spinDirection = 1;
 	}
 
 	public void render(Graphics g) {
@@ -40,20 +42,28 @@ public class Hammer extends GameObject {
 
 	public void tick(LinkedList<GameObject> gameObjects) {
 		if(throwHammer) {
-			angle += 0.05;
+			angle += 0.05 * spinDirection;
 			
 			if(angle >= 360) {
 				angle = 0;
 			}
-			x++;
+			x += xSpeed;
 		} else {
 			x = bigPlayer.getX() + bigPlayer.getScaledWidth()/4;
 			y = (bigPlayer.getY() + bigPlayer.getScaledHeight()/3);
+			
+			if(bigPlayer.getAction() == 0 || bigPlayer.getAction() == 2) {
+				angle = 45;
+				xSpeed = 2;
+				spinDirection = 1;
+			} else {
+				angle = -45;
+				xSpeed = -2;
+				spinDirection = -1;
+			}
 		}
 		
-		
-		
-		if(x > Constants.WIDTH) {
+		if(x > Constants.WIDTH || x < -scaledWidth) {
 			throwHammer = false;
 			resetPosition();
 		}
@@ -66,7 +76,6 @@ public class Hammer extends GameObject {
 	public void resetPosition() {
 		x = bigPlayer.getX() + bigPlayer.getScaledWidth()/4;
 		y = (bigPlayer.getY() + bigPlayer.getScaledHeight()/3);
-		angle = 45;
 	}
 
 }
