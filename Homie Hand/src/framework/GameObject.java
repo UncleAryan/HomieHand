@@ -30,6 +30,11 @@ public abstract class GameObject {
 		return bounds;
 	}
 	
+	public void updateBounds() {
+		bounds.x = x;
+		bounds.y = y;
+	}
+	
 	public abstract void render(Graphics g);
 	public abstract void tick(LinkedList<GameObject> gameObjects);
 

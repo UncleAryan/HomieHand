@@ -38,6 +38,7 @@ public class Panel extends JPanel implements Runnable {
 		smallPlayer = new SmallPlayer(400, 200, Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, 2, "SmallPlayer");
 		gameObjectHandler.addGameObject(bigPlayer);
 		gameObjectHandler.addGameObject(smallPlayer);
+		gameObjectHandler.addGameObject(bigPlayer.getHammer());
 	}
 	
 	public void tick() {

@@ -6,6 +6,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
+import framework.CollisionHandler;
 import framework.Constants;
 import framework.GameObject;
 import framework.LoadSave;
@@ -19,8 +20,7 @@ public class Hammer extends GameObject {
 	private BigPlayer bigPlayer;
 	private boolean throwHammer;
 	private double spinDirection;
-	private int mouseX, mouseY;
-	private int gravity;
+	private CollisionHandler collisionHandler;
 	
 	public Hammer(int x, int y, int width, int height, int scale, String ID, BigPlayer bigPlayer) {
 		super(x, y, width, height, scale, ID);
@@ -29,9 +29,7 @@ public class Hammer extends GameObject {
 		this.bigPlayer = bigPlayer;
 		throwHammer = false;
 		spinDirection = 1;
-		mouseX = 1;
-		mouseY = 1;
-		gravity = 1;
+		collisionHandler = new CollisionHandler();
 	}
 
 	public void render(Graphics g) {
@@ -57,33 +55,31 @@ public class Hammer extends GameObject {
 			
 			ySpeed = -1;
 		} else {
-			x = bigPlayer.getX() + bigPlayer.getScaledWidth()/4;
-			y = (bigPlayer.getY() + bigPlayer.getScaledHeight()/3);
-			
-			if(bigPlayer.getAction() == 0 || bigPlayer.getAction() == 2) {
-				angle = 45;
-				xSpeed = 2;
-				spinDirection = 1;
-			} else {
-				angle = -45;
-				xSpeed = -2;
-				spinDirection = -1;
-				
-			}
+			updatePosition();
 		}
 		
 		if(x > Constants.WIDTH || x < -scaledWidth) {
 			throwHammer = false;
 			resetPosition();
 		}
+		
+		updateBounds();
+		collisionHandler.checkCollision(gameObjects, this);
 	}
 	
-	public void setMouseX(int mouseX) {
-		this.mouseX = mouseX;
-	}
-	
-	public void setMouseY(int mouseY) {
-		this.mouseY = mouseY;
+	public void updatePosition() {
+		x = bigPlayer.getX() + bigPlayer.getScaledWidth()/4;
+		y = (bigPlayer.getY() + bigPlayer.getScaledHeight()/3);
+		
+		if(bigPlayer.getAction() == 0 || bigPlayer.getAction() == 2) {
+			angle = 45;
+			xSpeed = 2;
+			spinDirection = 1;
+		} else {
+			angle = -45;
+			xSpeed = -2;
+			spinDirection = -1;
+		}
 	}
 	
 	public void throwHammer() {
