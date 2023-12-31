@@ -18,7 +18,6 @@ public class BigPlayer extends GameObject {
 	private int action;
 	private int gravity;
 	private AnimationLoader animationLoader;
-	private CollisionHandler collisionHandler;
 	private Hammer hammer;
 	
 	public BigPlayer(int x, int y, int width, int height, int scale, String ID) {
@@ -26,7 +25,6 @@ public class BigPlayer extends GameObject {
 		animationLoader = new AnimationLoader(25);
 		action = 0; // starts off facing right idle
 		gravity = 1;
-		collisionHandler = new CollisionHandler();
 		animationLoader.loadAnimations(4, 9, originalWidth, originalHeight, LoadSave.BIGPLAYER_SPRITESHEET);
 		hammer = new Hammer(x, y, width, height, 2, "Hammer", this);
 	}
@@ -38,8 +36,16 @@ public class BigPlayer extends GameObject {
 		
 		hammer.tick(gameObjects);
 		
-		collisionHandler.checkCollision(gameObjects, this);
+		if(hammer.getThrowHammer() == true) {
+			hammerWithBigPlayer = false;
+		} else {
+			hammerWithBigPlayer = true;
+		}
+		
 		animationLoader.tickAnimation();
+		CollisionHandler.tick(gameObjects, this);
+		
+		System.out.println(hammerWithBigPlayer);
 	}
 	
 	public void render(Graphics g) {

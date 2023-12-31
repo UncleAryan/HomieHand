@@ -27,9 +27,9 @@ public class KeyInput implements KeyListener {
 			panel.getBigPlayer().setAction(2);
 			panel.getBigPlayer().setXSpeed(Constants.BIGPLAYER_XSPEED);
 		}
-		if(e.getKeyCode() == KeyEvent.VK_SPACE && SmallPlayer.onGround) {
+		if(e.getKeyCode() == KeyEvent.VK_SPACE && panel.getSmallPlayer().isOnGround()) {
 			panel.getSmallPlayer().setJumping(true);
-		}
+		} 
 		if(e.getKeyCode() == KeyEvent.VK_UP) {
 			panel.getBigPlayer().getHammer().throwHammer();
 		}

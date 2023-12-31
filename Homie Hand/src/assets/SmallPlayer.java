@@ -11,7 +11,6 @@ import framework.LoadSave;
 
 public class SmallPlayer extends GameObject {
 	private AnimationLoader animationLoader;
-	private CollisionHandler collisionHandler;
 	
 	/*
 	 * 0 = idle right
@@ -23,14 +22,12 @@ public class SmallPlayer extends GameObject {
 	private int gravity;
 	private boolean jumping;
 	private int MAX_JUMP;
-	public static boolean onGround;
 	private int jumpSpeed;
 	
 	public SmallPlayer(int x, int y, int width, int height, int scale, String ID) {
 		super(x, y, width, height, scale, ID);
 		animationLoader = new AnimationLoader(30);
 		action = 1; 
-		collisionHandler = new CollisionHandler();
 		gravity = 1;
 		jumping = false;
 		onGround = false;
@@ -52,12 +49,12 @@ public class SmallPlayer extends GameObject {
 		faceBigPlayer(gameObjects);
 		
 		if(jumping) {
+			onGround = false;
 			performJump();
 		} 
 		
-		collisionHandler.checkCollision(gameObjects, this);
 		animationLoader.tickAnimation();
-		
+		CollisionHandler.tick(gameObjects, this);
 		updateMaxJump();
 	}
 	
@@ -71,6 +68,16 @@ public class SmallPlayer extends GameObject {
 					action = 0;
 				}
 			} 
+		}
+	}
+	
+	public void pushJump() {
+		for(int i = 1; i <= jumpSpeed; i++) {
+			ySpeed = -i;	
+			if(y + ySpeed <= MAX_JUMP) {
+				jumping = false;
+				action = 1;
+			}
 		}
 	}
 	

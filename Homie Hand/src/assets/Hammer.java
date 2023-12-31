@@ -20,7 +20,6 @@ public class Hammer extends GameObject {
 	private BigPlayer bigPlayer;
 	private boolean throwHammer;
 	private double spinDirection;
-	private CollisionHandler collisionHandler;
 	
 	public Hammer(int x, int y, int width, int height, int scale, String ID, BigPlayer bigPlayer) {
 		super(x, y, width, height, scale, ID);
@@ -29,7 +28,6 @@ public class Hammer extends GameObject {
 		this.bigPlayer = bigPlayer;
 		throwHammer = false;
 		spinDirection = 1;
-		collisionHandler = new CollisionHandler();
 	}
 
 	public void render(Graphics g) {
@@ -53,7 +51,7 @@ public class Hammer extends GameObject {
 			x += xSpeed;
 			y += ySpeed;
 			
-			ySpeed = -1;
+			ySpeed = 0;
 		} else {
 			updatePosition();
 		}
@@ -63,8 +61,9 @@ public class Hammer extends GameObject {
 			resetPosition();
 		}
 		
+		CollisionHandler.tick(gameObjects, this);
+		
 		updateBounds();
-		collisionHandler.checkCollision(gameObjects, this);
 	}
 	
 	public void updatePosition() {
@@ -84,6 +83,10 @@ public class Hammer extends GameObject {
 	
 	public void throwHammer() {
 		throwHammer = true;
+	}
+	
+	public boolean getThrowHammer() {
+		return throwHammer;
 	}
 	
 	public void resetPosition() {

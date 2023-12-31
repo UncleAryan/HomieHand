@@ -13,6 +13,8 @@ public abstract class GameObject {
 	protected int scale;
 	protected String ID;
 	protected Rectangle bounds;
+	protected boolean onGround;
+	protected boolean hammerWithBigPlayer;
 	
 	public GameObject(int x, int y, int width, int height, int scale, String ID) {
 		this.x = x;
@@ -24,6 +26,24 @@ public abstract class GameObject {
 		scaledHeight = height * scale;
 		this.ID = ID;
 		bounds = new Rectangle(x, y, scaledWidth, scaledHeight);
+		onGround = false;
+		hammerWithBigPlayer = true;
+	}
+	
+	public void setHammerWithBigPlayer(boolean b) {
+		hammerWithBigPlayer = b;
+	}
+	
+	public boolean isHammerWithBigPlayer() {
+		return hammerWithBigPlayer;
+	}
+	
+	public boolean isOnGround() {
+		return onGround;
+	}
+	
+	public void setOnGround(boolean onGround) {
+		this.onGround = onGround;
 	}
     
 	public Rectangle getBounds() {
