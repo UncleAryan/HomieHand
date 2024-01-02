@@ -8,7 +8,7 @@ import java.util.LinkedList;
 public class CollisionHandler {
 
 	public CollisionHandler() {
-		
+
 	}
 
 	/*
@@ -33,10 +33,12 @@ public class CollisionHandler {
 			}
 
 			// hammer to small player collision
-			if (gameObjects.get(i).getID().equals("SmallPlayer") && objectColliding.getID().equals("Hammer")
-					&& objectColliding.getBounds().intersects(gameObjects.get(i).getBounds())
-					&& !gameObjects.get(i).isHammerWithBigPlayer()) {
-				gameObjects.get(i).setXSpeed(objectColliding.getXSpeed());
+			if (gameObjects.get(i).getID().equals("SmallPlayer") && objectColliding.getID().equals("Hammer")) {
+				if(objectColliding.getBounds().intersects(gameObjects.get(i).getBounds())) {
+					gameObjects.get(i).setXSpeed(1);
+				} else {
+					gameObjects.get(i).setXSpeed(0);
+				}
 			}
 		}
 

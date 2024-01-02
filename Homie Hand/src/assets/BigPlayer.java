@@ -44,8 +44,6 @@ public class BigPlayer extends GameObject {
 		
 		animationLoader.tickAnimation();
 		CollisionHandler.tick(gameObjects, this);
-		
-		System.out.println(hammerWithBigPlayer);
 	}
 	
 	public void render(Graphics g) {

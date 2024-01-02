@@ -4,8 +4,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
+import assets.Background;
 import assets.BigPlayer;
-import assets.Hammer;
 import assets.SmallPlayer;
 import framework.Constants;
 import framework.GameObjectHandler;
@@ -33,6 +33,7 @@ public class Panel extends JPanel implements Runnable {
 	
 	public void loadGameObjects() {
 		gameObjectHandler = new GameObjectHandler();
+		gameObjectHandler.addGameObject(new Background(0, 0, Constants.WIDTH, Constants.HEIGHT, 1, "Background"));
 		levelHandler = new LevelHandler(this);
 		bigPlayer = new BigPlayer(200, 200, Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, 4, "BigPlayer");
 		smallPlayer = new SmallPlayer(400, 200, Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, 2, "SmallPlayer");
