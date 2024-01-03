@@ -3,7 +3,6 @@ package inputs;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import assets.SmallPlayer;
 import core.Panel;
 import framework.Constants;
 
@@ -17,30 +16,30 @@ public class KeyInput implements KeyListener {
 	}
 
 	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+		if(e.getKeyCode() == KeyEvent.VK_A) {
 			movingRight = false;
 			panel.getBigPlayer().setAction(3);
 			panel.getBigPlayer().setXSpeed(-Constants.BIGPLAYER_XSPEED);
 		}
-		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+		if(e.getKeyCode() == KeyEvent.VK_D) {
 			movingRight = true;
 			panel.getBigPlayer().setAction(2);
 			panel.getBigPlayer().setXSpeed(Constants.BIGPLAYER_XSPEED);
 		}
-		if(e.getKeyCode() == KeyEvent.VK_SPACE && panel.getSmallPlayer().isOnGround()) {
+		if(e.getKeyCode() == KeyEvent.VK_SPACE && !panel.getSmallPlayer().isJumping()) {
 			panel.getSmallPlayer().setJumping(true);
-		} 
-		if(e.getKeyCode() == KeyEvent.VK_UP) {
+		}
+		if(e.getKeyCode() == KeyEvent.VK_W) {
 			panel.getBigPlayer().getHammer().throwHammer();
 		}
 	}
 
 	public void keyReleased(KeyEvent e) {
-		if(e.getKeyCode() == KeyEvent.VK_LEFT && !movingRight) {
+		if(e.getKeyCode() == KeyEvent.VK_A && !movingRight) {
 			panel.getBigPlayer().setAction(1);
 			panel.getBigPlayer().setXSpeed(0);
 		}
-		if(e.getKeyCode() == KeyEvent.VK_RIGHT && movingRight) {
+		if(e.getKeyCode() == KeyEvent.VK_D && movingRight) {
 			panel.getBigPlayer().setAction(0);
 			panel.getBigPlayer().setXSpeed(0);
 		}

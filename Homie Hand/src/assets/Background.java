@@ -13,6 +13,7 @@ public class Background extends GameObject {
 	public Background(int x, int y, int width, int height, int scale, String ID) {
 		super(x, y, width, height, scale, ID);
 		cloudyBackground = LoadSave.getSpriteSheet(LoadSave.CLOUDY_BACKGROUND);
+		xSpeed = -1;	
 	}
 
 	public void render(Graphics g) {
@@ -23,7 +24,7 @@ public class Background extends GameObject {
 	}
 
 	public void tick(LinkedList<GameObject> gameObjects) {
-		x--;
+		x += xSpeed;
 		if(x <= -scaledWidth) {
 			x = 0;
 		}

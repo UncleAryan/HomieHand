@@ -51,7 +51,7 @@ public class Hammer extends GameObject {
 			x += xSpeed;
 			y += ySpeed;
 			
-			ySpeed = 0;
+			ySpeed = -1;
 		} else {
 			updatePosition();
 		}
@@ -72,11 +72,11 @@ public class Hammer extends GameObject {
 		
 		if(bigPlayer.getAction() == 0 || bigPlayer.getAction() == 2) {
 			angle = 45;
-			xSpeed = 2;
+			xSpeed = 3;
 			spinDirection = 1;
 		} else {
 			angle = -45;
-			xSpeed = -2;
+			xSpeed = -3;
 			spinDirection = -1;
 		}
 	}
