@@ -49,6 +49,9 @@ public class CollisionHandler {
 				objectColliding.getBounds().y -= objectColliding.getYSpeed();
 				while (!gameObjects.get(i).getBounds().intersects(objectColliding.getBounds())) {
 					objectColliding.getBounds().y += Math.signum(objectColliding.getYSpeed());
+					if(objectColliding.getID().equals("SmallPlayer")) {
+						objectColliding.setOnGround(true);
+					}
 				}
 				
 				objectColliding.getBounds().y -= Math.signum(objectColliding.getYSpeed());

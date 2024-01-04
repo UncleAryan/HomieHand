@@ -21,6 +21,5 @@ public class Grass extends GameObject {
 	
 	public void render(Graphics g) {
 		g.drawImage(grass, x, y, scaledWidth, scaledHeight, null);
-		showBoundsOutline(g);
 	}
 }

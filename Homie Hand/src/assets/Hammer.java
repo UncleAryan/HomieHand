@@ -37,8 +37,6 @@ public class Hammer extends GameObject {
 	    g2d.setTransform(rotatedImageInstance);
 	    g2d.drawImage(image, x, y, scaledWidth, scaledHeight, null);
 	    g2d.setTransform(resetImage);
-	    
-	    showBoundsOutline(g);
 	}
 	
 	public void tick(LinkedList<GameObject> gameObjects) {

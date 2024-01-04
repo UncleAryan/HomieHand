@@ -21,6 +21,5 @@ public class Dirt extends GameObject {
 	
 	public void render(Graphics g) {
 		g.drawImage(dirt, x, y, scaledWidth, scaledHeight, null);
-		showBoundsOutline(g);
 	}
 }

@@ -1,7 +1,11 @@
 package core;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
+
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import assets.Background;
@@ -21,6 +25,7 @@ public class Panel extends JPanel implements Runnable {
 	private SmallPlayer smallPlayer;
 	private LevelHandler levelHandler;
 	private GameObjectHandler gameObjectHandler;
+	private JLabel performanceStat;
 	
 	public Panel() {
 		setSize();
@@ -32,6 +37,12 @@ public class Panel extends JPanel implements Runnable {
 	}
 	
 	public void loadGameObjects() {
+		performanceStat = new JLabel();
+		performanceStat.setFont(new Font("Arial", Font.BOLD, 32));
+		performanceStat.setForeground(Color.WHITE);
+		performanceStat.setBounds(0, 0, 320, 32);
+		performanceStat.setText("FPS: 0" + " TICKS: 0");
+		add(performanceStat);
 		gameObjectHandler = new GameObjectHandler();
 		gameObjectHandler.addGameObject(new Background(0, 0, Constants.WIDTH, Constants.HEIGHT, 1, "Background"));
 		levelHandler = new LevelHandler(this);
@@ -86,7 +97,7 @@ public class Panel extends JPanel implements Runnable {
 			
 			if(System.currentTimeMillis() - lastCheck >= 1000) {
 				lastCheck = System.currentTimeMillis();
-				System.out.println("FPS: " + fps + " TICKS: " + ticks);
+				performanceStat.setText("FPS: " + fps + " TICKS: " + ticks);
 				fps = 0;
 				ticks = 0;
 			}
@@ -106,6 +117,7 @@ public class Panel extends JPanel implements Runnable {
 	
 	private void setSize() {
 		setPreferredSize(new Dimension(Constants.WIDTH, Constants.HEIGHT));
+		setLayout(null);
 	}
 	
 	public BigPlayer getBigPlayer() {

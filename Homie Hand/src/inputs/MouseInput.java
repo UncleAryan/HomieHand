@@ -4,19 +4,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-import javax.swing.JLabel;
-
 import core.Panel;
 
 public class MouseInput implements MouseListener, MouseMotionListener {
 	private Panel panel;
-	private JLabel coords;
 	private int mouseX, mouseY;
 	
 	public MouseInput(Panel panel) {
 		this.panel = panel;
-		coords = new JLabel();
-		panel.add(coords);
 		mouseX = 0;
 		mouseY = 0;
 	}
@@ -27,7 +22,6 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 
 	public void mouseMoved(MouseEvent e) {
 		updateMousePosition(e);
-		coords.setText("x: " + mouseX + " | y: " + mouseY);
 	}
 
 	public void mouseClicked(MouseEvent e) {

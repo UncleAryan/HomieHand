@@ -31,14 +31,13 @@ public class SmallPlayer extends GameObject {
 		gravity = 1;
 		jumping = false;
 		onGround = false;
-		MAX_JUMP = y - scaledHeight * 5;
+		MAX_JUMP = y - scaledHeight * 4;
 		jumpSpeed = 10;
 		animationLoader.loadAnimations(4, 19, originalWidth, originalHeight, LoadSave.SMALLPLAYER_SPRITESHEET);
 	}
 
 	public void render(Graphics g) {
 		g.drawImage(animationLoader.getAnimations()[action][animationLoader.getAnimationIndex()], x, y, scaledWidth, scaledHeight, null);
-		showBoundsOutline(g);
 	}
 
 	public void tick(LinkedList<GameObject> gameObjects) {
@@ -46,7 +45,7 @@ public class SmallPlayer extends GameObject {
 		y += ySpeed;
 		ySpeed = gravity;
 		
-		updateMaxJump();
+		
 		faceBigPlayer(gameObjects);
 		
 		if(jumping) {
@@ -56,6 +55,8 @@ public class SmallPlayer extends GameObject {
 		animationLoader.tickAnimation();
 		CollisionHandler.tick(gameObjects, this);
 		updateBounds();
+		
+		updateMaxJump();
 	}
 	
 	public void faceBigPlayer(LinkedList<GameObject> gameObjects) {
@@ -83,7 +84,8 @@ public class SmallPlayer extends GameObject {
 			
 			for(int i = 0; i <= jumpSpeed; i++) {
 				ySpeed = -i;	
-				if(y + ySpeed <= 100) {
+				onGround = false;
+				if(y + ySpeed <= MAX_JUMP) {
 					jumping = false;
 					action = 1;
 				}
@@ -95,7 +97,7 @@ public class SmallPlayer extends GameObject {
 	
 	public void updateMaxJump() {
 		if(onGround) {
-			MAX_JUMP = y - scaledHeight * 5;
+			MAX_JUMP = y - scaledHeight * 4;
 		}
 	}
 	

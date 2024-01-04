@@ -50,8 +50,6 @@ public class BigPlayer extends GameObject {
 		g.drawImage(animationLoader.getAnimations()[action][animationLoader.getAnimationIndex()], x, y, scaledWidth, scaledHeight, null);
 		
 		hammer.render(g);
-		
-		showBoundsOutline(g);
 	}
 	
 	public void setAction(int action) {

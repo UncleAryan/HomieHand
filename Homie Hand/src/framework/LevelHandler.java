@@ -2,6 +2,7 @@ package framework;
 
 import java.awt.image.BufferedImage;
 
+import assets.Dirt;
 import assets.Grass;
 import core.Panel;
 
@@ -22,10 +23,13 @@ public class LevelHandler {
 				int blue = (pixel) & 0xff;
 			
 				if(red == 255 && green == 255 && blue == 255) {
-					panel.getGameObjectHandler().addGameObject(
-							new Grass(row * Constants.DEFAULT_GAMEOBJECT_WIDTH, col * Constants.DEFAULT_GAMEOBJECT_HEIGHT, 
-									Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, 1, "Block")
-						); 
+					panel.getGameObjectHandler().addGameObject(new Grass(row * Constants.DEFAULT_GAMEOBJECT_WIDTH, col * Constants.DEFAULT_GAMEOBJECT_HEIGHT, 
+									                                     Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, 1, "Block")); 
+				}
+				
+				if(red == 64 && green == 64 && blue == 64) {
+					panel.getGameObjectHandler().addGameObject(new Dirt(row * Constants.DEFAULT_GAMEOBJECT_WIDTH, col * Constants.DEFAULT_GAMEOBJECT_HEIGHT, 
+									                                     Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, 1, "Block")); 
 				}
 			}
 		}
