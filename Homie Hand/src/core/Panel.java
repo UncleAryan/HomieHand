@@ -40,7 +40,7 @@ public class Panel extends JPanel implements Runnable {
 		performanceStat = new JLabel();
 		performanceStat.setFont(new Font("Arial", Font.BOLD, 32));
 		performanceStat.setForeground(Color.WHITE);
-		performanceStat.setBounds(0, 0, 320, 32);
+		performanceStat.setBounds(0, 0, 1280, 32);
 		performanceStat.setText("FPS: 0" + " TICKS: 0");
 		add(performanceStat);
 		gameObjectHandler = new GameObjectHandler();
