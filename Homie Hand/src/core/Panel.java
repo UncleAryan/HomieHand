@@ -110,7 +110,7 @@ public class Panel extends JPanel implements Runnable {
 	}
 	private void loadInputs() {
 		addKeyListener(new KeyInput(this));
-	    mouseInput = new MouseInput(this);
+	    mouseInput = new MouseInput();
 		addMouseListener(mouseInput);
 		addMouseMotionListener(mouseInput);
 	}

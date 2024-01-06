@@ -29,7 +29,8 @@ public class CollisionHandler {
 			}
 
 			// hammer to small player collision
-			if (gameObjects.get(i).getID().equals("SmallPlayer") && objectColliding.getID().equals("Hammer")) {
+			if (gameObjects.get(i).getID().equals("SmallPlayer") && objectColliding.getID().equals("Hammer") &&
+				!objectColliding.hammerWithBigPlayer) {
 				if(objectColliding.getBounds().intersects(gameObjects.get(i).getBounds())) {
 					gameObjects.get(i).setXSpeed(3);
 					gameObjects.get(i).setYSpeed(-2);

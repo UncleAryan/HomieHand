@@ -37,9 +37,10 @@ public class BigPlayer extends GameObject {
 		hammer.tick(gameObjects);
 		
 		if(hammer.getThrowHammer() == true) {
-			hammerWithBigPlayer = false;
+			hammer.setHammerWithBigPlayer(false);
+			
 		} else {
-			hammerWithBigPlayer = true;
+			hammer.setHammerWithBigPlayer(true);
 		}
 		
 		animationLoader.tickAnimation();

@@ -27,7 +27,6 @@ public abstract class GameObject {
 		this.ID = ID;
 		bounds = new Rectangle(x, y, scaledWidth, scaledHeight);
 		onGround = false;
-		hammerWithBigPlayer = true;
 	}
 	
 	public void setHammerWithBigPlayer(boolean b) {

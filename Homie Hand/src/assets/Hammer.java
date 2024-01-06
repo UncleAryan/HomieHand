@@ -28,6 +28,7 @@ public class Hammer extends GameObject {
 		this.bigPlayer = bigPlayer;
 		throwHammer = false;
 		spinDirection = 1;
+		hammerWithBigPlayer = true;
 	}
 
 	public void render(Graphics g) {
@@ -54,7 +55,7 @@ public class Hammer extends GameObject {
 			updatePosition();
 		}
 		
-		if(x > Constants.WIDTH || x < -scaledWidth) {
+		if(x > Constants.WIDTH || x < -scaledWidth || y > Constants.HEIGHT || y < -scaledHeight) {
 			throwHammer = false;
 			resetPosition();
 		}
