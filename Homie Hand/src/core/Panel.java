@@ -13,6 +13,7 @@ import assets.BigPlayer;
 import assets.SmallPlayer;
 import framework.Constants;
 import framework.GameObjectHandler;
+import framework.GameState;
 import framework.LevelHandler;
 import inputs.KeyInput;
 import inputs.MouseInput;
@@ -26,6 +27,7 @@ public class Panel extends JPanel implements Runnable {
 	private LevelHandler levelHandler;
 	private GameObjectHandler gameObjectHandler;
 	private JLabel performanceStat;
+	private Menu menu;
 	
 	public Panel() {
 		setSize();
@@ -37,6 +39,7 @@ public class Panel extends JPanel implements Runnable {
 	}
 	
 	public void loadGameObjects() {
+		menu = new Menu();
 		performanceStat = new JLabel();
 		performanceStat.setFont(new Font("Arial", Font.BOLD, 32));
 		performanceStat.setForeground(Color.WHITE);
@@ -54,13 +57,31 @@ public class Panel extends JPanel implements Runnable {
 	}
 	
 	public void tick() {
-		gameObjectHandler.tick();
+		switch(GameState.state) {
+		case MENU:
+			menu.tick();
+			break;
+		case PLAY:
+			gameObjectHandler.tick();
+			break;
+		default:
+			break;
+		}
 	}
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		gameObjectHandler.render(g);
+		switch(GameState.state) {
+		case MENU:
+			menu.render(g);
+			break;
+		case PLAY:
+			gameObjectHandler.render(g);
+			break;
+		default:
+			break;
+		}
 	}
 	
 	public void run() {

@@ -4,6 +4,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import framework.GameState;
+
 public class MouseInput implements MouseListener, MouseMotionListener {
 	private int mouseX, mouseY;
 	
@@ -21,7 +23,7 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		
+		GameState.state = GameState.PLAY;
 	}
 
 	public void mousePressed(MouseEvent e) {
