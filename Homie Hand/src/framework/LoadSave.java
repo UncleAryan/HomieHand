@@ -12,6 +12,8 @@ public class LoadSave {
 	public static final String LEVEL_ONE = "level1.png";
 	public static final String HAMMER = "hammer.png";
 	public static final String CLOUDY_BACKGROUND = "cloudy_background.png";
+	public static final String POINTER = "pointer.png";
+	public static final String BUTTONS_SPRITESHEET = "menu_buttons.png";
 	
 	public static BufferedImage getSpriteSheet(String file) {
 		BufferedImage image = null;

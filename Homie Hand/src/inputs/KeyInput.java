@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 
 import core.Panel;
 import framework.Constants;
+import framework.GameState;
 
 public class KeyInput implements KeyListener {
 	private Panel panel;
@@ -16,6 +17,25 @@ public class KeyInput implements KeyListener {
 	}
 
 	public void keyPressed(KeyEvent e) {
+		if(GameState.state == GameState.MENU) {
+			if(e.getKeyCode() == KeyEvent.VK_UP) {
+				panel.getMenu().movePointerUp();
+			}
+			if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+				panel.getMenu().movePointerDown();
+			}
+			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+				if(panel.getMenu().getPointerPointing().equals("START")) {
+					GameState.state = GameState.PLAY;
+				}
+				if(panel.getMenu().getPointerPointing().equals("SETTINGS")) {
+					System.out.println("Settings need to be implemented");
+				}
+				if(panel.getMenu().getPointerPointing().equals("EXIT")) {
+					System.exit(0);
+				}
+			}
+		}
 		if(e.getKeyCode() == KeyEvent.VK_A) {
 			movingRight = false;
 			panel.getBigPlayer().setAction(3);

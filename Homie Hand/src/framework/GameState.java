@@ -2,7 +2,8 @@ package framework;
 
 public enum GameState {
 	MENU,
-	PLAY;
+	PLAY,
+	PAUSE;
 	
 	public static GameState state = MENU;
 }

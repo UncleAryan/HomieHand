@@ -46,6 +46,7 @@ public class Panel extends JPanel implements Runnable {
 		performanceStat.setBounds(0, 0, 1280, 32);
 		performanceStat.setText("FPS: 0" + " TICKS: 0");
 		add(performanceStat);
+		performanceStat.setVisible(false);
 		gameObjectHandler = new GameObjectHandler();
 		gameObjectHandler.addGameObject(new Background(0, 0, Constants.WIDTH, Constants.HEIGHT, 1, "Background"));
 		levelHandler = new LevelHandler(this);
@@ -64,6 +65,8 @@ public class Panel extends JPanel implements Runnable {
 		case PLAY:
 			gameObjectHandler.tick();
 			break;
+		case PAUSE:
+			break;
 		default:
 			break;
 		}
@@ -78,6 +81,9 @@ public class Panel extends JPanel implements Runnable {
 			break;
 		case PLAY:
 			gameObjectHandler.render(g);
+			performanceStat.setVisible(true);
+			break;
+		case PAUSE:
 			break;
 		default:
 			break;
@@ -151,5 +157,9 @@ public class Panel extends JPanel implements Runnable {
 	
 	public GameObjectHandler getGameObjectHandler() {
 		return gameObjectHandler;
+	}
+	
+	public Menu getMenu() {
+		return menu;
 	}
 }

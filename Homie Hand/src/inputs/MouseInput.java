@@ -23,7 +23,7 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		GameState.state = GameState.PLAY;
+		
 	}
 
 	public void mousePressed(MouseEvent e) {
