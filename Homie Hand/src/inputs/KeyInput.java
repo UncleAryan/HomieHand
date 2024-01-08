@@ -29,7 +29,7 @@ public class KeyInput implements KeyListener {
 					GameState.state = GameState.PLAY;
 				}
 				if(panel.getMenu().getPointerPointing().equals("SETTINGS")) {
-					System.out.println("Settings need to be implemented");
+					GameState.state = GameState.SETTINGS;
 				}
 				if(panel.getMenu().getPointerPointing().equals("EXIT")) {
 					System.exit(0);

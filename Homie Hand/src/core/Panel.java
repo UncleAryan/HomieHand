@@ -20,7 +20,8 @@ import inputs.MouseInput;
 
 public class Panel extends JPanel implements Runnable {
 	private MouseInput mouseInput;
-	private final int FPS = 120, TICKS = 200;
+	private int FPS = 120;
+	private final int TICKS = 200;
 	private Thread thread;
 	private BigPlayer bigPlayer;
 	private SmallPlayer smallPlayer;
@@ -28,6 +29,7 @@ public class Panel extends JPanel implements Runnable {
 	private GameObjectHandler gameObjectHandler;
 	private JLabel performanceStat;
 	private Menu menu;
+	private SettingsMenu settingsMenu;
 	
 	public Panel() {
 		setSize();
@@ -39,7 +41,6 @@ public class Panel extends JPanel implements Runnable {
 	}
 	
 	public void loadGameObjects() {
-		menu = new Menu();
 		performanceStat = new JLabel();
 		performanceStat.setFont(new Font("Arial", Font.BOLD, 32));
 		performanceStat.setForeground(Color.WHITE);
@@ -55,6 +56,8 @@ public class Panel extends JPanel implements Runnable {
 		gameObjectHandler.addGameObject(bigPlayer);
 		gameObjectHandler.addGameObject(smallPlayer);
 		gameObjectHandler.addGameObject(bigPlayer.getHammer());
+		menu = new Menu(this);
+		settingsMenu = new SettingsMenu(this);
 	}
 	
 	public void tick() {
@@ -66,6 +69,9 @@ public class Panel extends JPanel implements Runnable {
 			gameObjectHandler.tick();
 			break;
 		case PAUSE:
+			break;
+		case SETTINGS:
+			settingsMenu.tick();
 			break;
 		default:
 			break;
@@ -84,6 +90,9 @@ public class Panel extends JPanel implements Runnable {
 			performanceStat.setVisible(true);
 			break;
 		case PAUSE:
+			break;
+		case SETTINGS:
+			settingsMenu.render(g);
 			break;
 		default:
 			break;

@@ -8,16 +8,21 @@ import framework.Constants;
 import framework.LoadSave;
 
 public class Menu {
+	private BufferedImage background;
 	private BufferedImage pointer;
 	private BufferedImage[][] buttons;
 	
 	private int pointerScale;
 	private int buttonScale;
+	private int bigPlayerScale;
+	private int smallPlayerScale;
 	
 	private int scaledPointerWidth;
 	private int scaledPointerHeight;
 	private int scaledButtonWidth;
 	private int scaledButtonHeight;
+	private int scaledBigPlayerWidth, scaledBigPlayerHeight;
+	private int scaledSmallPlayerWidth, scaledSmallPlayerHeight;
 	
 	private int startButtonY;
 	private int settingsButtonY;
@@ -28,6 +33,8 @@ public class Menu {
 	private int pointerYExit;
 	private int pointerX;
 	private int pointerY;
+	private int bigPlayerX, bigPlayerY;
+	private int smallPlayerX, smallPlayerY;
 	
 	private String pointerPointing;
 	
@@ -36,16 +43,26 @@ public class Menu {
 	private int settingsButtonLight = 0;
 	private int exitButtonLight = 0;
 	
-	public Menu() {
+	private Panel panel;
+	
+	public Menu(Panel panel) {
+		this.panel = panel;
+		
 		loadImages();
 		
 		pointerScale = 2;
 		buttonScale = 8;
+		bigPlayerScale = 4;
+		smallPlayerScale = 6;
 		
 		scaledPointerWidth = Constants.DEFAULT_POINTER_WIDTH * pointerScale;
 		scaledPointerHeight = Constants.DEFAULT_POINTER_HEIGHT * pointerScale;
 		scaledButtonWidth = Constants.DEFAULT_BUTTON_WIDTH * buttonScale;
 		scaledButtonHeight = Constants.DEFAULT_BUTTON_HEIGHT * buttonScale;
+		scaledBigPlayerWidth = Constants.DEFAULT_GAMEOBJECT_WIDTH * bigPlayerScale;
+		scaledBigPlayerHeight = Constants.DEFAULT_GAMEOBJECT_HEIGHT * bigPlayerScale;
+		scaledSmallPlayerHeight = Constants.DEFAULT_GAMEOBJECT_HEIGHT * smallPlayerScale;
+		scaledSmallPlayerWidth = Constants.DEFAULT_GAMEOBJECT_WIDTH * smallPlayerScale;
 		
 		centerXForAllButtons = Constants.WIDTH/2-(scaledButtonWidth/2);
 		startButtonY = Constants.HEIGHT/3;
@@ -60,11 +77,19 @@ public class Menu {
 		pointerYExit = (exitButtonY + scaledButtonHeight/2) - scaledPointerHeight/2;
 		pointerY = pointerYStart;
 		pointerPointing = "START";
+		
+		bigPlayerX = pointerX - (scaledButtonWidth + scaledPointerWidth);
+		bigPlayerY = startButtonY + scaledButtonHeight/2;
+		smallPlayerX = pointerX + (scaledButtonWidth*2 + scaledPointerWidth);
+		smallPlayerY = settingsButtonY + scaledButtonHeight/2;
 	}
 	
 	public void render(Graphics g) {
 		g.setColor(Color.GRAY);
 		g.fillRect(0, 0, Constants.WIDTH, Constants.HEIGHT);
+		
+		// background
+		g.drawImage(background, 0, 0, Constants.WIDTH, Constants.HEIGHT, null);
 		
 		// START button
 		g.drawImage(buttons[0][startButtonLight], centerXForAllButtons, startButtonY,
@@ -80,9 +105,20 @@ public class Menu {
 		// pointer is initially pointing at START button
 		g.drawImage(pointer, pointerX, pointerY,
 						     scaledPointerWidth, scaledPointerHeight, null);
+		
+		// big player animation
+		g.drawImage(panel.getBigPlayer().getAnimationLoader().getAnimations()[0][panel.getBigPlayer().getAnimationLoader().getAnimationIndex()],
+				    bigPlayerX, bigPlayerY, scaledBigPlayerWidth, scaledBigPlayerHeight, null);
+		
+		// small player animation
+		g.drawImage(panel.getSmallPlayer().getAnimationLoader().getAnimations()[1][panel.getSmallPlayer().getAnimationLoader().getAnimationIndex()],
+			    smallPlayerX, smallPlayerY, scaledSmallPlayerWidth, scaledSmallPlayerHeight, null);
 	}
 	
 	public void tick() {
+		panel.getBigPlayer().getAnimationLoader().tickAnimation();
+		panel.getSmallPlayer().getAnimationLoader().tickAnimation();
+		
 		switch(pointerPointing) {
 		case "START":
 			pointerY = pointerYStart;
@@ -137,6 +173,7 @@ public class Menu {
 	}
 	
 	private void loadImages() {
+		background = LoadSave.getSpriteSheet(LoadSave.MENU_BACKGROUND);
 		pointer = LoadSave.getSpriteSheet(LoadSave.POINTER);
 		
 		BufferedImage buttonsSpriteSheet = LoadSave.getSpriteSheet(LoadSave.BUTTONS_SPRITESHEET);

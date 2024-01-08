@@ -106,4 +106,12 @@ public abstract class GameObject {
 	public int getYSpeed() {
 		return ySpeed;
 	}
+	
+	public int getScale() {
+		return scale;
+	}
+	
+	public void setScale(int scale) {
+		this.scale = scale;
+	}
 }

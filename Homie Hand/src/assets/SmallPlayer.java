@@ -108,4 +108,8 @@ public class SmallPlayer extends GameObject {
 	public boolean isJumping() {
 		return jumping;
 	}
+	
+	public AnimationLoader getAnimationLoader() {
+		return animationLoader;
+	}
 }

@@ -12,7 +12,7 @@ import framework.GameObject;
 import framework.LoadSave;
 	
 public class Hammer extends GameObject {
-	private BufferedImage image;
+	private BufferedImage hammer;
 	private double angle;
 	private AffineTransform resetImage;
 	private AffineTransform rotatedImageInstance;
@@ -23,7 +23,7 @@ public class Hammer extends GameObject {
 	
 	public Hammer(int x, int y, int width, int height, int scale, String ID, BigPlayer bigPlayer) {
 		super(x, y, width, height, scale, ID);
-		image = LoadSave.getSpriteSheet(LoadSave.HAMMER);
+		hammer = LoadSave.getSpriteSheet(LoadSave.HAMMER);
 		angle = 45;
 		this.bigPlayer = bigPlayer;
 		throwHammer = false;
@@ -36,7 +36,7 @@ public class Hammer extends GameObject {
 		resetImage = g2d.getTransform();
 	    rotatedImageInstance = AffineTransform.getRotateInstance(angle, x + scaledWidth/2, y + scaledHeight/2);
 	    g2d.setTransform(rotatedImageInstance);
-	    g2d.drawImage(image, x, y, scaledWidth, scaledHeight, null);
+	    g2d.drawImage(hammer, x, y, scaledWidth, scaledHeight, null);
 	    g2d.setTransform(resetImage);
 	}
 	
@@ -44,9 +44,6 @@ public class Hammer extends GameObject {
 		if(throwHammer) {
 			angle += 0.05 * spinDirection;
 			
-			if(angle >= 360) {
-				angle = 0;
-			}
 			x += xSpeed;
 			y += ySpeed;
 			
@@ -91,6 +88,22 @@ public class Hammer extends GameObject {
 	public void resetPosition() {
 		x = bigPlayer.getX() + bigPlayer.getScaledWidth()/4;
 		y = (bigPlayer.getY() + bigPlayer.getScaledHeight()/3);
+	}
+	
+	public void startRotate() {
+		angle += 0.05 * spinDirection;
+		
+		if(angle >= 360) {
+			angle = 0;
+		}
+	}
+	
+	public double getAngle() {
+		return angle;
+	}
+	
+	public BufferedImage getHammerImage() {
+		return hammer;
 	}
 
 }

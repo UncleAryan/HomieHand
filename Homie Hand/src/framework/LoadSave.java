@@ -14,6 +14,7 @@ public class LoadSave {
 	public static final String CLOUDY_BACKGROUND = "cloudy_background.png";
 	public static final String POINTER = "pointer.png";
 	public static final String BUTTONS_SPRITESHEET = "menu_buttons.png";
+	public static final String MENU_BACKGROUND = "menu_background.png";
 	
 	public static BufferedImage getSpriteSheet(String file) {
 		BufferedImage image = null;
