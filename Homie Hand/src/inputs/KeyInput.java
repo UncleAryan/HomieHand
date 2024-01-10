@@ -19,19 +19,19 @@ public class KeyInput implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		if(GameState.state == GameState.MENU) {
 			if(e.getKeyCode() == KeyEvent.VK_UP) {
-				panel.getMenu().movePointerUp();
+				panel.getMainMenu().movePointerUp();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_DOWN) {
-				panel.getMenu().movePointerDown();
+				panel.getMainMenu().movePointerDown();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-				if(panel.getMenu().getPointerPointing().equals("START")) {
+				if(panel.getMainMenu().getPointerPointing().equals("START")) {
 					GameState.state = GameState.PLAY;
 				}
-				if(panel.getMenu().getPointerPointing().equals("SETTINGS")) {
+				if(panel.getMainMenu().getPointerPointing().equals("SETTINGS")) {
 					GameState.state = GameState.SETTINGS;
 				}
-				if(panel.getMenu().getPointerPointing().equals("EXIT")) {
+				if(panel.getMainMenu().getPointerPointing().equals("EXIT")) {
 					System.exit(0);
 				}
 			}

@@ -15,4 +15,6 @@ public class Constants {
 	public final static int DEFAULT_POINTER_HEIGHT = 14;
 	public final static int DEFAULT_ARROW_BUTTON_WIDTH = 16;
 	public final static int DEFAULT_ARROW_BUTTON_HEIGHT = 16;
+	public final static int DEFAULT_FPS_TEXTFIELD_WIDTH = 64;
+	public final static int DEFAULT_FPS_TEXTFIELD_HEIGHT = 32;
 }

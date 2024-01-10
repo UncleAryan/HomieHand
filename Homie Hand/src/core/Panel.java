@@ -28,7 +28,7 @@ public class Panel extends JPanel implements Runnable {
 	private LevelHandler levelHandler;
 	private GameObjectHandler gameObjectHandler;
 	private JLabel performanceStat;
-	private Menu menu;
+	private MainMenu mainMenu;
 	private SettingsMenu settingsMenu;
 	
 	public Panel() {
@@ -56,14 +56,14 @@ public class Panel extends JPanel implements Runnable {
 		gameObjectHandler.addGameObject(bigPlayer);
 		gameObjectHandler.addGameObject(smallPlayer);
 		gameObjectHandler.addGameObject(bigPlayer.getHammer());
-		menu = new Menu(this);
+		mainMenu = new MainMenu(this);
 		settingsMenu = new SettingsMenu(this);
 	}
 	
 	public void tick() {
 		switch(GameState.state) {
 		case MENU:
-			menu.tick();
+			mainMenu.tick();
 			break;
 		case PLAY:
 			gameObjectHandler.tick();
@@ -83,7 +83,7 @@ public class Panel extends JPanel implements Runnable {
 		
 		switch(GameState.state) {
 		case MENU:
-			menu.render(g);
+			mainMenu.render(g);
 			break;
 		case PLAY:
 			gameObjectHandler.render(g);
@@ -168,7 +168,7 @@ public class Panel extends JPanel implements Runnable {
 		return gameObjectHandler;
 	}
 	
-	public Menu getMenu() {
-		return menu;
+	public MainMenu getMainMenu() {
+		return mainMenu;
 	}
 }

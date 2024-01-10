@@ -1,13 +1,12 @@
 package core;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import framework.Constants;
 import framework.ImageLoader;
 
-public class Menu {
+public class MainMenu {
 	private BufferedImage background;
 	private BufferedImage pointer;
 	private BufferedImage[][] buttons;
@@ -45,7 +44,7 @@ public class Menu {
 	
 	private Panel panel;
 	
-	public Menu(Panel panel) {
+	public MainMenu(Panel panel) {
 		this.panel = panel;
 		
 		loadImages();
@@ -85,9 +84,6 @@ public class Menu {
 	}
 	
 	public void render(Graphics g) {
-		g.setColor(Color.GRAY);
-		g.fillRect(0, 0, Constants.WIDTH, Constants.HEIGHT);
-		
 		// background
 		g.drawImage(background, 0, 0, Constants.WIDTH, Constants.HEIGHT, null);
 		
@@ -106,13 +102,7 @@ public class Menu {
 		g.drawImage(pointer, pointerX, pointerY,
 						     scaledPointerWidth, scaledPointerHeight, null);
 		
-		// big player animation
-		g.drawImage(panel.getBigPlayer().getAnimationLoader().getAnimations()[0][panel.getBigPlayer().getAnimationLoader().getAnimationIndex()],
-				    bigPlayerX, bigPlayerY, scaledBigPlayerWidth, scaledBigPlayerHeight, null);
-		
-		// small player animation
-		g.drawImage(panel.getSmallPlayer().getAnimationLoader().getAnimations()[1][panel.getSmallPlayer().getAnimationLoader().getAnimationIndex()],
-			    smallPlayerX, smallPlayerY, scaledSmallPlayerWidth, scaledSmallPlayerHeight, null);
+		renderAnimations(g);
 	}
 	
 	public void tick() {
@@ -185,5 +175,19 @@ public class Menu {
 						Constants.DEFAULT_BUTTON_WIDTH, Constants.DEFAULT_BUTTON_HEIGHT);
 			}
 		}
+	}
+	
+	public BufferedImage getBackgroundImage() {
+		return background;
+	}
+	
+	public void renderAnimations(Graphics g) {
+		// big player animation
+		g.drawImage(panel.getBigPlayer().getAnimationLoader().getAnimations()[0][panel.getBigPlayer().getAnimationLoader().getAnimationIndex()],
+				    bigPlayerX, bigPlayerY, scaledBigPlayerWidth, scaledBigPlayerHeight, null);
+				
+		// small player animation
+	    g.drawImage(panel.getSmallPlayer().getAnimationLoader().getAnimations()[1][panel.getSmallPlayer().getAnimationLoader().getAnimationIndex()],
+					smallPlayerX, smallPlayerY, scaledSmallPlayerWidth, scaledSmallPlayerHeight, null);
 	}
 }
