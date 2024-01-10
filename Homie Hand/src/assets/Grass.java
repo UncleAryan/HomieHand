@@ -5,14 +5,14 @@ import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
 import framework.GameObject;
-import framework.LoadSave;
+import framework.ImageLoader;
 
 public class Grass extends GameObject {
 	private BufferedImage grass;
 	
 	public Grass(int x, int y, int width, int height, int scale, String ID) {
 		super(x, y, width, height, scale, ID);
-		grass = LoadSave.getSpriteSheet(LoadSave.BLOCK_SPRITESHEET).getSubimage(0, 0, width, height);
+		grass = ImageLoader.getSpriteSheet(ImageLoader.BLOCK_SPRITESHEET).getSubimage(0, 0, width, height);
 	}
 	
 	public void tick(LinkedList<GameObject> gameObjects) {

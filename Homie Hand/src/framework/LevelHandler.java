@@ -11,7 +11,7 @@ public class LevelHandler {
 	
 	public LevelHandler(Panel panel) {
 		this.panel = panel;
-		loadLevel(LoadSave.getSpriteSheet(LoadSave.LEVEL_ONE));
+		loadLevel(ImageLoader.getSpriteSheet(ImageLoader.LEVEL_ONE));
 	}
 	
 	private void loadLevel(BufferedImage level) {

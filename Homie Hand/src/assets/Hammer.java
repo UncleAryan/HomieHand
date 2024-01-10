@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import framework.CollisionHandler;
 import framework.Constants;
 import framework.GameObject;
-import framework.LoadSave;
+import framework.ImageLoader;
 	
 public class Hammer extends GameObject {
 	private BufferedImage hammer;
@@ -23,7 +23,7 @@ public class Hammer extends GameObject {
 	
 	public Hammer(int x, int y, int width, int height, int scale, String ID, BigPlayer bigPlayer) {
 		super(x, y, width, height, scale, ID);
-		hammer = LoadSave.getSpriteSheet(LoadSave.HAMMER);
+		hammer = ImageLoader.getSpriteSheet(ImageLoader.HAMMER);
 		angle = 45;
 		this.bigPlayer = bigPlayer;
 		throwHammer = false;

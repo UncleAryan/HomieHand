@@ -28,7 +28,7 @@ public class AnimationLoader {
 	
 	public void loadAnimations(int r, int c, int width, int height, String filePath) {
 		numColumes = c;
-		BufferedImage image = LoadSave.getSpriteSheet(filePath);
+		BufferedImage image = ImageLoader.getSpriteSheet(filePath);
 		
 		animations = new BufferedImage[r][c];
 		for(int row = 0; row < animations.length; row++) {

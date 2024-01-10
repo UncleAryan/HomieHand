@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import framework.AnimationLoader;
 import framework.CollisionHandler;
 import framework.GameObject;
-import framework.LoadSave;
+import framework.ImageLoader;
 
 
 public class SmallPlayer extends GameObject {
@@ -33,7 +33,7 @@ public class SmallPlayer extends GameObject {
 		onGround = false;
 		MAX_JUMP = y - scaledHeight * 4;
 		jumpSpeed = 10;
-		animationLoader.loadAnimations(4, 19, originalWidth, originalHeight, LoadSave.SMALLPLAYER_SPRITESHEET);
+		animationLoader.loadAnimations(4, 19, originalWidth, originalHeight, ImageLoader.SMALLPLAYER_SPRITESHEET);
 	}
 
 	public void render(Graphics g) {

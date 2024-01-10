@@ -5,14 +5,14 @@ import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
 import framework.GameObject;
-import framework.LoadSave;
+import framework.ImageLoader;
 
 public class Background extends GameObject {
 	private BufferedImage cloudyBackground;
 	
 	public Background(int x, int y, int width, int height, int scale, String ID) {
 		super(x, y, width, height, scale, ID);
-		cloudyBackground = LoadSave.getSpriteSheet(LoadSave.CLOUDY_BACKGROUND);
+		cloudyBackground = ImageLoader.getSpriteSheet(ImageLoader.CLOUDY_BACKGROUND);
 		xSpeed = -1;	
 	}
 

@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import framework.AnimationLoader;
 import framework.CollisionHandler;
 import framework.GameObject;
-import framework.LoadSave;
+import framework.ImageLoader;
 
 public class BigPlayer extends GameObject {
 	/*
@@ -25,7 +25,7 @@ public class BigPlayer extends GameObject {
 		animationLoader = new AnimationLoader(25);
 		action = 0; // starts off facing right idle
 		gravity = 1;
-		animationLoader.loadAnimations(4, 9, originalWidth, originalHeight, LoadSave.BIGPLAYER_SPRITESHEET);
+		animationLoader.loadAnimations(4, 9, originalWidth, originalHeight, ImageLoader.BIGPLAYER_SPRITESHEET);
 		hammer = new Hammer(x, y, width, height, 2, "Hammer", this);
 	}
 	

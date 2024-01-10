@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
 
-public class LoadSave {
+public class ImageLoader {
 	public static final String BIGPLAYER_SPRITESHEET = "big_player_animations.png";
 	public static final String SMALLPLAYER_SPRITESHEET = "small_player_animation.png";
 	public static final String BLOCK_SPRITESHEET = "block_spritesheet.png";
@@ -18,7 +18,7 @@ public class LoadSave {
 	
 	public static BufferedImage getSpriteSheet(String file) {
 		BufferedImage image = null;
-		InputStream inputStream = LoadSave.class.getResourceAsStream("/" + file);
+		InputStream inputStream = ImageLoader.class.getResourceAsStream("/" + file);
 		try {
 			image = ImageIO.read(inputStream);
 			

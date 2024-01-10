@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import framework.Constants;
-import framework.LoadSave;
+import framework.ImageLoader;
 
 public class Menu {
 	private BufferedImage background;
@@ -173,10 +173,10 @@ public class Menu {
 	}
 	
 	private void loadImages() {
-		background = LoadSave.getSpriteSheet(LoadSave.MENU_BACKGROUND);
-		pointer = LoadSave.getSpriteSheet(LoadSave.POINTER);
+		background = ImageLoader.getSpriteSheet(ImageLoader.MENU_BACKGROUND);
+		pointer = ImageLoader.getSpriteSheet(ImageLoader.POINTER);
 		
-		BufferedImage buttonsSpriteSheet = LoadSave.getSpriteSheet(LoadSave.BUTTONS_SPRITESHEET);
+		BufferedImage buttonsSpriteSheet = ImageLoader.getSpriteSheet(ImageLoader.BUTTONS_SPRITESHEET);
 		buttons = new BufferedImage[4][2];
 		for(int row = 0; row < buttons.length; row++) {
 			for(int col = 0; col < buttons[row].length; col++) {
