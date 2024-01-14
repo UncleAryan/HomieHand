@@ -17,6 +17,8 @@ public class ImageLoader {
 	public static final String MENU_BACKGROUND = "menu_background.png";
 	public static final String ARROW_BUTTONS_SPRITESHEET = "arrow_buttons.png";
 	public static final String FPS_OPTIONS_SPRITESHEET = "fps_textfield.png";
+	public static final String SETTINGS_MENU_BACKGROUND = "settings_menu_background.png";
+	public static final String BACK_BUTTON_SPRITESHEET = "back_buttons.png";
 	
 	public static BufferedImage getSpriteSheet(String file) {
 		BufferedImage image = null;

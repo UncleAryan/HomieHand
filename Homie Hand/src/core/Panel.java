@@ -20,8 +20,8 @@ import inputs.MouseInput;
 
 public class Panel extends JPanel implements Runnable {
 	private MouseInput mouseInput;
-	private int FPS = 120;
-	private final int TICKS = 200;
+	private int FPS;
+	private final int TICKS;
 	private Thread thread;
 	private BigPlayer bigPlayer;
 	private SmallPlayer smallPlayer;
@@ -30,8 +30,11 @@ public class Panel extends JPanel implements Runnable {
 	private JLabel performanceStat;
 	private MainMenu mainMenu;
 	private SettingsMenu settingsMenu;
+	private boolean FPSChanged;
 	
 	public Panel() {
+		TICKS = 200;
+		
 		setSize();
 		loadInputs();
 		setFocusable(true);
@@ -41,6 +44,8 @@ public class Panel extends JPanel implements Runnable {
 	}
 	
 	public void loadGameObjects() {
+		FPS = 60;
+		FPSChanged = false;
 		performanceStat = new JLabel();
 		performanceStat.setFont(new Font("Arial", Font.BOLD, 32));
 		performanceStat.setForeground(Color.WHITE);
@@ -113,6 +118,21 @@ public class Panel extends JPanel implements Runnable {
 		double changeInFrames = 0;
 		
 		while(true) {
+			if(FPSChanged) {
+				timePerFrame = 1000000000 / FPS;
+				timePerTick = 1000000000 / TICKS;
+				
+				preTime = System.nanoTime();
+				lastCheck = System.currentTimeMillis();
+				
+				fps = 0;
+				ticks = 0;
+				
+				changeInTicks = 0;
+				changeInFrames = 0;
+				
+				FPSChanged = false;
+			}
 			long now = System.nanoTime();
 			
 			changeInTicks += (now - preTime) / timePerTick;
@@ -146,7 +166,7 @@ public class Panel extends JPanel implements Runnable {
 	}
 	private void loadInputs() {
 		addKeyListener(new KeyInput(this));
-	    mouseInput = new MouseInput();
+	    mouseInput = new MouseInput(this);
 		addMouseListener(mouseInput);
 		addMouseMotionListener(mouseInput);
 	}
@@ -170,5 +190,21 @@ public class Panel extends JPanel implements Runnable {
 	
 	public MainMenu getMainMenu() {
 		return mainMenu;
+	}
+	
+	public SettingsMenu getSettingsMenu() {
+		return settingsMenu;
+	}
+	
+	public void setFPS(int fps) {
+		FPS = fps;
+	}
+	
+	public int getFPS() {
+		return FPS;
+	}
+	
+	public void FPSChanged(boolean value) {
+		FPSChanged = value;
 	}
 }

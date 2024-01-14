@@ -17,4 +17,6 @@ public class Constants {
 	public final static int DEFAULT_ARROW_BUTTON_HEIGHT = 16;
 	public final static int DEFAULT_FPS_TEXTFIELD_WIDTH = 64;
 	public final static int DEFAULT_FPS_TEXTFIELD_HEIGHT = 32;
+	public final static int DEFAULT_BACK_BUTTON_WIDTH = 32;
+	public final static int DEFAULT_BACK_BUTTON_HEIGHT = 32;
 }
