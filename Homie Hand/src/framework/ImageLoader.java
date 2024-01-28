@@ -19,6 +19,9 @@ public class ImageLoader {
 	public static final String FPS_OPTIONS_SPRITESHEET = "fps_textfield.png";
 	public static final String SETTINGS_MENU_BACKGROUND = "settings_menu_background.png";
 	public static final String BACK_BUTTON_SPRITESHEET = "back_buttons.png";
+	public static final String ICE_BLOCK = "ice.png";
+	public static final String LAVA_BLOCK = "lava.png";
+	public static final String STONE_BLOCK = "stone.png";
 	
 	public static BufferedImage getSpriteSheet(String file) {
 		BufferedImage image = null;

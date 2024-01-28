@@ -4,6 +4,9 @@ import java.awt.image.BufferedImage;
 
 import assets.Dirt;
 import assets.Grass;
+import assets.Ice;
+import assets.Lava;
+import assets.Stone;
 import core.Panel;
 
 public class LevelHandler {
@@ -30,6 +33,21 @@ public class LevelHandler {
 				if(red == 64 && green == 64 && blue == 64) {
 					panel.getGameObjectHandler().addGameObject(new Dirt(row * Constants.DEFAULT_GAMEOBJECT_WIDTH, col * Constants.DEFAULT_GAMEOBJECT_HEIGHT, 
 									                                     Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, 1, "Block")); 
+				}
+				
+				if(red == 0 && green == 0 && blue == 51) {
+					panel.getGameObjectHandler().addGameObject(new Ice(row * Constants.DEFAULT_GAMEOBJECT_WIDTH, col * Constants.DEFAULT_GAMEOBJECT_HEIGHT, 
+                            											Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, 1, "Block"));
+				}
+				
+				if(red == 0 && green == 51 && blue == 0) {
+					panel.getGameObjectHandler().addGameObject(new Stone(row * Constants.DEFAULT_GAMEOBJECT_WIDTH, col * Constants.DEFAULT_GAMEOBJECT_HEIGHT, 
+                            											Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, 1, "Block"));
+				}
+				
+				if(red == 51 && green == 0 && blue == 0) {
+					panel.getGameObjectHandler().addGameObject(new Lava(row * Constants.DEFAULT_GAMEOBJECT_WIDTH, col * Constants.DEFAULT_GAMEOBJECT_HEIGHT, 
+                            											Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, 1, "Block"));
 				}
 			}
 		}

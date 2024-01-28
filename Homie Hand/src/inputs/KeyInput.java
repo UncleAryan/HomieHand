@@ -17,7 +17,8 @@ public class KeyInput implements KeyListener {
 	}
 
 	public void keyPressed(KeyEvent e) {
-		if(GameState.state == GameState.MENU) {
+		switch(GameState.state) {
+		case MENU:
 			if(e.getKeyCode() == KeyEvent.VK_UP) {
 				panel.getMainMenu().movePointerUp();
 			}
@@ -35,22 +36,35 @@ public class KeyInput implements KeyListener {
 					System.exit(0);
 				}
 			}
-		}
-		if(e.getKeyCode() == KeyEvent.VK_A) {
-			movingRight = false;
-			panel.getBigPlayer().setAction(3);
-			panel.getBigPlayer().setXSpeed(-Constants.BIGPLAYER_XSPEED);
-		}
-		if(e.getKeyCode() == KeyEvent.VK_D) {
-			movingRight = true;
-			panel.getBigPlayer().setAction(2);
-			panel.getBigPlayer().setXSpeed(Constants.BIGPLAYER_XSPEED);
-		}
-		if(e.getKeyCode() == KeyEvent.VK_SPACE && !panel.getSmallPlayer().isJumping()) {
-			panel.getSmallPlayer().setJumping(true);
-		}
-		if(e.getKeyCode() == KeyEvent.VK_W) {
-			panel.getBigPlayer().getHammer().throwHammer();
+			break;
+		case PAUSE:
+			break;
+		case PLAY:
+			if(e.getKeyCode() == KeyEvent.VK_A) {
+				movingRight = false;
+				panel.getBigPlayer().setAction(3);
+				panel.getBigPlayer().setXSpeed(-Constants.BIGPLAYER_XSPEED);
+			}
+			if(e.getKeyCode() == KeyEvent.VK_D) {
+				movingRight = true;
+				panel.getBigPlayer().setAction(2);
+				panel.getBigPlayer().setXSpeed(Constants.BIGPLAYER_XSPEED);
+			}
+			if(e.getKeyCode() == KeyEvent.VK_SPACE && !panel.getSmallPlayer().isJumping()) {
+				panel.getSmallPlayer().setJumping(true);
+			}
+			if(e.getKeyCode() == KeyEvent.VK_W) {
+				panel.getBigPlayer().getHammer().throwHammer();
+			}
+			if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+				GameState.state = GameState.MENU;
+			}
+			break;
+		case SETTINGS:
+			break;
+		default:
+			break;
+		
 		}
 	}
 
