@@ -9,6 +9,7 @@ import framework.GameObject;
 import framework.ImageLoader;
 
 public class BigPlayer extends GameObject {
+	// r = 255, g = 106, b = 0
 	/*
 	 * 0 = idle right
 	 * 1 = idle left

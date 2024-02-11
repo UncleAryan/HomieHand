@@ -11,29 +11,29 @@ public class MainMenu {
 	private BufferedImage pointer;
 	private BufferedImage[][] buttons;
 	
-	private int pointerScale;
-	private int buttonScale;
-	private int bigPlayerScale;
-	private int smallPlayerScale;
+	private float pointerScale;
+	private float buttonScale;
+	private float bigPlayerScale;
+	private float smallPlayerScale;
 	
-	private int scaledPointerWidth;
-	private int scaledPointerHeight;
-	private int scaledButtonWidth;
-	private int scaledButtonHeight;
-	private int scaledBigPlayerWidth, scaledBigPlayerHeight;
-	private int scaledSmallPlayerWidth, scaledSmallPlayerHeight;
+	private float scaledPointerWidth;
+	private float scaledPointerHeight;
+	private float scaledButtonWidth;
+	private float scaledButtonHeight;
+	private float scaledBigPlayerWidth, scaledBigPlayerHeight;
+	private float scaledSmallPlayerWidth, scaledSmallPlayerHeight;
 	
-	private int startButtonY;
-	private int settingsButtonY;
-	private int exitButtonY;
-	private int centerXForAllButtons;
-	private int pointerYStart;
-	private int pointerYSettings;
-	private int pointerYExit;
-	private int pointerX;
-	private int pointerY;
-	private int bigPlayerX, bigPlayerY;
-	private int smallPlayerX, smallPlayerY;
+	private float startButtonY;
+	private float settingsButtonY;
+	private float exitButtonY;
+	private float centerXForAllButtons;
+	private float pointerYStart;
+	private float pointerYSettings;
+	private float pointerYExit;
+	private float pointerX;
+	private float pointerY;
+	private float bigPlayerX, bigPlayerY;
+	private float smallPlayerX, smallPlayerY;
 	
 	private String pointerPointing;
 	
@@ -85,22 +85,22 @@ public class MainMenu {
 	
 	public void render(Graphics g) {
 		// background
-		g.drawImage(background, 0, 0, Constants.WIDTH, Constants.HEIGHT, null);
+		g.drawImage(background, 0, 0, (int)Constants.WIDTH, (int)Constants.HEIGHT, null);
 		
 		// START button
-		g.drawImage(buttons[0][startButtonLight], centerXForAllButtons, startButtonY,
-				                   scaledButtonWidth, scaledButtonHeight, null);
+		g.drawImage(buttons[0][startButtonLight], (int)centerXForAllButtons, (int)startButtonY,
+				(int)scaledButtonWidth, (int)scaledButtonHeight, null);
 		// SETTINGS button
-		g.drawImage(buttons[3][settingsButtonLight], centerXForAllButtons, settingsButtonY,
-                                   scaledButtonWidth, scaledButtonHeight, null);
+		g.drawImage(buttons[3][settingsButtonLight], (int)centerXForAllButtons, (int)settingsButtonY,
+				(int)scaledButtonWidth, (int)scaledButtonHeight, null);
 		
 		// EXIT button
-		g.drawImage(buttons[1][exitButtonLight], centerXForAllButtons, exitButtonY,
-		                           scaledButtonWidth, scaledButtonHeight, null);
+		g.drawImage(buttons[1][exitButtonLight], (int)centerXForAllButtons, (int)exitButtonY,
+				(int)scaledButtonWidth, (int)scaledButtonHeight, null);
 		
 		// pointer is initially pointing at START button
-		g.drawImage(pointer, pointerX, pointerY,
-						     scaledPointerWidth, scaledPointerHeight, null);
+		g.drawImage(pointer, (int)pointerX, (int)pointerY,
+				(int)scaledPointerWidth, (int)scaledPointerHeight, null);
 		
 		renderAnimations(g);
 	}
@@ -184,10 +184,10 @@ public class MainMenu {
 	public void renderAnimations(Graphics g) {
 		// big player animation
 		g.drawImage(panel.getBigPlayer().getAnimationLoader().getAnimations()[0][panel.getBigPlayer().getAnimationLoader().getAnimationIndex()],
-				    bigPlayerX, bigPlayerY, scaledBigPlayerWidth, scaledBigPlayerHeight, null);
+				(int)bigPlayerX, (int)bigPlayerY, (int)scaledBigPlayerWidth, (int)scaledBigPlayerHeight, null);
 				
 		// small player animation
 	    g.drawImage(panel.getSmallPlayer().getAnimationLoader().getAnimations()[1][panel.getSmallPlayer().getAnimationLoader().getAnimationIndex()],
-					smallPlayerX, smallPlayerY, scaledSmallPlayerWidth, scaledSmallPlayerHeight, null);
+	    		(int)smallPlayerX, (int)smallPlayerY, (int)scaledSmallPlayerWidth, (int)scaledSmallPlayerHeight, null);
 	}
 }

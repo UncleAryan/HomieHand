@@ -29,6 +29,8 @@ public class Hammer extends GameObject {
 		throwHammer = false;
 		spinDirection = 1;
 		hammerWithBigPlayer = true;
+		x = bigPlayer.getX() + bigPlayer.getScaledWidth()/4;
+		y = bigPlayer.getY() + bigPlayer.getScaledHeight()/3;
 	}
 
 	public void render(Graphics g) {
@@ -64,7 +66,7 @@ public class Hammer extends GameObject {
 	
 	public void updatePosition() {
 		x = bigPlayer.getX() + bigPlayer.getScaledWidth()/4;
-		y = (bigPlayer.getY() + bigPlayer.getScaledHeight()/3);
+		y = bigPlayer.getY() + bigPlayer.getScaledHeight()/3;
 		
 		if(bigPlayer.getAction() == 0 || bigPlayer.getAction() == 2) {
 			angle = 45;

@@ -8,6 +8,7 @@ import framework.GameObject;
 import framework.ImageLoader;
 
 public class Grass extends GameObject {
+	// r = 0, g = 102, b = 0
 	private BufferedImage grass;
 	
 	public Grass(int x, int y, int width, int height, int scale, String ID) {

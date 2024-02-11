@@ -9,6 +9,7 @@ import framework.GameObject;
 import framework.ImageLoader;
 
 public class Dirt extends GameObject {
+	// r = 64, g = 64, g = 64
 	private BufferedImage dirt;
 	
 	public Dirt(int x, int y, int width, int height, int scale, String ID) {

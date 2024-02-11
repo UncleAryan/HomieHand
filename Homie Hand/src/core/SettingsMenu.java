@@ -14,24 +14,24 @@ public class SettingsMenu {
 	
 	private int fpsSettingIndex;
 	
-	private int fpsOptionsScale;
-	private int arrowButtonsScale;
-	private int backButtonsScale;
+	private float fpsOptionsScale;
+	private float arrowButtonsScale;
+	private float backButtonsScale;
 	
-	private int scaledFPSOptionsWidth;
-	private int scaledFPSOptionsHeight;
-	private int scaledArrowButtonWidth;
-	private int scaledArrowButtonHeight;
-	private int scaledBackButtonsWidth;
-	private int scaledBackButtonsHeight;
+	private float scaledFPSOptionsWidth;
+	private float scaledFPSOptionsHeight;
+	private float scaledArrowButtonWidth;
+	private float scaledArrowButtonHeight;
+	private float scaledBackButtonsWidth;
+	private float scaledBackButtonsHeight;
 	
-	private int fpsOptionsX;
-	private int fpsOptionsY;
-	private int leftFPSOptionsArrowButtonX;
-	private int rightFPSOptionsArrowButtonX;
-	private int fpsOptionsArrowButtonY;
-	private int backButtonsX;
-	private int backButtonsY;
+	private float fpsOptionsX;
+	private float fpsOptionsY;
+	private float leftFPSOptionsArrowButtonX;
+	private float rightFPSOptionsArrowButtonX;
+	private float fpsOptionsArrowButtonY;
+	private float backButtonsX;
+	private float backButtonsY;
 	
 	private int leftFPSOptionsButtonLight;
 	private int rightFPSOptionsButtonLight;
@@ -78,18 +78,18 @@ public class SettingsMenu {
 	
 	public void render(Graphics g) {
 		// rendering same background and animations as main menu
-		g.drawImage(settingsMenuBackground, 0, 0, Constants.WIDTH, Constants.HEIGHT, null);
+		g.drawImage(settingsMenuBackground, 0, 0, (int)Constants.WIDTH, (int)Constants.HEIGHT, null);
 		panel.getMainMenu().renderAnimations(g);
 		
 		// settings
-		g.drawImage(fpsOptions[fpsSettingIndex], fpsOptionsX, fpsOptionsY,
-					scaledFPSOptionsWidth, scaledFPSOptionsHeight, null);
-		g.drawImage(arrowButtons[leftFPSOptionsButtonLight], leftFPSOptionsArrowButtonX, fpsOptionsArrowButtonY,
-					scaledArrowButtonWidth, scaledArrowButtonHeight, null);
-		g.drawImage(arrowButtons[rightFPSOptionsButtonLight], rightFPSOptionsArrowButtonX, fpsOptionsArrowButtonY,
-					scaledArrowButtonWidth, scaledArrowButtonHeight, null);
-		g.drawImage(backButtons[backButtonLight], backButtonsX, backButtonsY, 
-				    scaledBackButtonsWidth, scaledBackButtonsHeight, null);
+		g.drawImage(fpsOptions[fpsSettingIndex], (int)fpsOptionsX, (int)fpsOptionsY,
+				(int)scaledFPSOptionsWidth, (int)scaledFPSOptionsHeight, null);
+		g.drawImage(arrowButtons[leftFPSOptionsButtonLight], (int)leftFPSOptionsArrowButtonX, (int)fpsOptionsArrowButtonY,
+				(int)scaledArrowButtonWidth, (int)scaledArrowButtonHeight, null);
+		g.drawImage(arrowButtons[rightFPSOptionsButtonLight], (int)rightFPSOptionsArrowButtonX, (int)fpsOptionsArrowButtonY,
+				(int)scaledArrowButtonWidth, (int)scaledArrowButtonHeight, null);
+		g.drawImage(backButtons[backButtonLight], (int)backButtonsX, (int)backButtonsY, 
+				(int)scaledBackButtonsWidth, (int)scaledBackButtonsHeight, null);
 	}
 	
 	public void tick() {
@@ -179,16 +179,16 @@ public class SettingsMenu {
 			return 360;
 		}
 	}
-	public int getBackButtonsX() {
+	public float getBackButtonsX() {
 		return backButtonsX;
 	}
-	public int getBackButtonsY() {
+	public float getBackButtonsY() {
 		return backButtonsY;
 	}
-	public int getScaledBackButtonsWidth() {
+	public float getScaledBackButtonsWidth() {
 		return scaledBackButtonsWidth;
 	}
-	public int getScaledBackButtonsHeight() {
+	public float getScaledBackButtonsHeight() {
 		return scaledBackButtonsHeight;
 	}
 	public int getFPSSettingIndex() {
@@ -197,19 +197,19 @@ public class SettingsMenu {
 	public void setFPSSettingIndex(int fpsSettingIndex) {
 		this.fpsSettingIndex = fpsSettingIndex;
 	}
-	public int getLeftFPSOptionsArrowButtonX() {
+	public float getLeftFPSOptionsArrowButtonX() {
 		return leftFPSOptionsArrowButtonX;
 	}
-	public int getRightFPSOptionsArrowButtonX() {
+	public float getRightFPSOptionsArrowButtonX() {
 		return rightFPSOptionsArrowButtonX;
 	}
-	public int getScaledArrowButtonWidth() {
+	public float getScaledArrowButtonWidth() {
 		return scaledArrowButtonWidth;
 	}
-	public int getScaledArrowButtonHeight() {
+	public float getScaledArrowButtonHeight() {
 		return scaledArrowButtonHeight;
 	}
-	public int getFPSOptionsArrowButtonY() {
+	public float getFPSOptionsArrowButtonY() {
 		return fpsOptionsArrowButtonY;
 	}
 	public boolean getHoveringOverLeftFPSOptionsButton() {

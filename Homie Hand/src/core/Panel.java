@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import assets.Background;
 import assets.BigPlayer;
 import assets.SmallPlayer;
+import framework.Camera;
 import framework.Constants;
 import framework.GameObjectHandler;
 import framework.GameState;
@@ -19,6 +20,7 @@ import inputs.KeyInput;
 import inputs.MouseInput;
 
 public class Panel extends JPanel implements Runnable {
+	private static final long serialVersionUID = 1L;
 	private MouseInput mouseInput;
 	private int FPS;
 	private final int TICKS;
@@ -31,6 +33,7 @@ public class Panel extends JPanel implements Runnable {
 	private MainMenu mainMenu;
 	private SettingsMenu settingsMenu;
 	private boolean FPSChanged;
+	public static Camera camera;
 	
 	public Panel() {
 		TICKS = 200;
@@ -54,15 +57,17 @@ public class Panel extends JPanel implements Runnable {
 		add(performanceStat);
 		performanceStat.setVisible(false);
 		gameObjectHandler = new GameObjectHandler();
-		gameObjectHandler.addGameObject(new Background(0, 0, Constants.WIDTH, Constants.HEIGHT, 1, "Background"));
+		gameObjectHandler.addGameObject(new Background(0, 0, (int)Constants.WIDTH, (int)Constants.HEIGHT, 1, "Background"));
 		levelHandler = new LevelHandler(this);
 		bigPlayer = new BigPlayer(200, 200, Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, 4, "BigPlayer");
 		smallPlayer = new SmallPlayer(400, 200, Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, 2, "SmallPlayer");
 		gameObjectHandler.addGameObject(bigPlayer);
 		gameObjectHandler.addGameObject(smallPlayer);
+		camera = new Camera(0, 0);
 		gameObjectHandler.addGameObject(bigPlayer.getHammer());
 		mainMenu = new MainMenu(this);
 		settingsMenu = new SettingsMenu(this);
+		
 	}
 	
 	public void tick() {
@@ -88,6 +93,7 @@ public class Panel extends JPanel implements Runnable {
 		
 		switch(GameState.state) {
 		case MENU:
+			performanceStat.setVisible(false);
 			mainMenu.render(g);
 			break;
 		case PLAY:
@@ -95,8 +101,10 @@ public class Panel extends JPanel implements Runnable {
 			performanceStat.setVisible(true);
 			break;
 		case PAUSE:
+			performanceStat.setVisible(false);
 			break;
 		case SETTINGS:
+			performanceStat.setVisible(false);
 			settingsMenu.render(g);
 			break;
 		default:
@@ -172,8 +180,11 @@ public class Panel extends JPanel implements Runnable {
 	}
 	
 	private void setSize() {
-		setPreferredSize(new Dimension(Constants.WIDTH, Constants.HEIGHT));
-		setLayout(null);
+		if(Constants.WIDTH == 1920 && Constants.HEIGHT == 1080) {
+			
+		}
+		setPreferredSize(new Dimension((int)Constants.WIDTH , (int)Constants.HEIGHT));
+		
 	}
 	
 	public BigPlayer getBigPlayer() {
