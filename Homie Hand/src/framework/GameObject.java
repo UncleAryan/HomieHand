@@ -6,17 +6,17 @@ import java.awt.Rectangle;
 import java.util.LinkedList;
 
 public abstract class GameObject {
-	protected int x, y;
-	protected int xSpeed, ySpeed;
-	protected int originalWidth, originalHeight;
-	protected int scaledWidth, scaledHeight;
-	protected int scale;
+	protected float x, y;
+	protected float xSpeed, ySpeed;
+	protected float originalWidth, originalHeight;
+	protected float scaledWidth, scaledHeight;
+	protected float scale;
 	protected String ID;
 	protected Rectangle bounds;
 	protected boolean onGround;
 	protected boolean hammerWithBigPlayer;
 	
-	public GameObject(int x, int y, int width, int height, int scale, String ID) {
+	public GameObject(float x, float y, float width, float height, float scale, String ID) {
 		this.x = x;
 		this.y = y;
 		originalWidth = width;
@@ -25,7 +25,7 @@ public abstract class GameObject {
 		scaledWidth = width * scale;
 		scaledHeight = height * scale;
 		this.ID = ID;
-		bounds = new Rectangle(x, y, scaledWidth, scaledHeight);
+		bounds = new Rectangle((int)x, (int)y, (int)scaledWidth, (int)scaledHeight);
 		onGround = false;
 	}
 	
@@ -50,8 +50,8 @@ public abstract class GameObject {
 	}
 	
 	public void updateBounds() {
-		bounds.x = x;
-		bounds.y = y;
+		bounds.x = (int) x;
+		bounds.y = (int) y;
 	}
 	
 	public abstract void render(Graphics g);
@@ -59,59 +59,59 @@ public abstract class GameObject {
 
 	public void showBoundsOutline(Graphics g) {
 		g.setColor(Color.BLUE);
-		g.drawRect(x, y, scaledWidth, scaledHeight);
+		g.drawRect((int)x, (int)y, (int)scaledWidth, (int)scaledHeight);
 	}
 	
-	public int getOriginalWidth() {
+	public float getOriginalWidth() {
 		return originalWidth;
 	}
-	public int getOrignialHeight() {
+	public float getOrignialHeight() {
 		return originalHeight;
 	}
-	public int getScaledWidth() {
+	public float getScaledWidth() {
 		return scaledWidth;
 	}
-	public int getScaledHeight() {
+	public float getScaledHeight() {
 		return scaledHeight;
 	}
 	
-	public int getX() {
+	public float getX() {
 		return x;
 	}
 
-	public void setX(int x) {
+	public void setX(float x) {
 		this.x = x;
 	}
 
-	public int getY() {
+	public float getY() {
 		return y;
 	}
 
-	public void setY(int y) {
+	public void setY(float y) {
 		this.y = y;
 	}
 	
 	public String getID() {
 		return ID;
 	}
-	public void setXSpeed(int speed) {
+	public void setXSpeed(float speed) {
 		xSpeed = speed;
 	}
-	public void setYSpeed(int speed) {
+	public void setYSpeed(float speed) {
 		ySpeed = speed;
 	}
-	public int getXSpeed() {
+	public float getXSpeed() {
 		return xSpeed;
 	}
-	public int getYSpeed() {
+	public float getYSpeed() {
 		return ySpeed;
 	}
 	
-	public int getScale() {
+	public float getScale() {
 		return scale;
 	}
 	
-	public void setScale(int scale) {
+	public void setScale(float scale) {
 		this.scale = scale;
 	}
 }

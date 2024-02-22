@@ -21,7 +21,7 @@ public class Hammer extends GameObject {
 	private boolean throwHammer;
 	private double spinDirection;
 	
-	public Hammer(int x, int y, int width, int height, int scale, String ID, BigPlayer bigPlayer) {
+	public Hammer(float x, float y, float width, float height, float scale, String ID, BigPlayer bigPlayer) {
 		super(x, y, width, height, scale, ID);
 		hammer = ImageLoader.getSpriteSheet(ImageLoader.HAMMER);
 		angle = 45;
@@ -29,8 +29,8 @@ public class Hammer extends GameObject {
 		throwHammer = false;
 		spinDirection = 1;
 		hammerWithBigPlayer = true;
-		x = bigPlayer.getX() + bigPlayer.getScaledWidth()/4;
-		y = bigPlayer.getY() + bigPlayer.getScaledHeight()/3;
+		this.x = bigPlayer.getX() + bigPlayer.getScaledWidth()/4;
+		this.y = bigPlayer.getY() + bigPlayer.getScaledHeight()/3;
 	}
 
 	public void render(Graphics g) {
@@ -38,8 +38,10 @@ public class Hammer extends GameObject {
 		resetImage = g2d.getTransform();
 	    rotatedImageInstance = AffineTransform.getRotateInstance(angle, x + scaledWidth/2, y + scaledHeight/2);
 	    g2d.setTransform(rotatedImageInstance);
-	    g2d.drawImage(hammer, x, y, scaledWidth, scaledHeight, null);
+	    g2d.drawImage(hammer, (int)x, (int)y, (int)scaledWidth, (int)scaledHeight, null);
 	    g2d.setTransform(resetImage);
+	    
+	    showBoundsOutline(g);
 	}
 	
 	public void tick(LinkedList<GameObject> gameObjects) {

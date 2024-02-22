@@ -11,9 +11,9 @@ public class Ice extends GameObject {
 	// r = 0, g = 0, b = 51
 	private BufferedImage ice;
 	
-	public Ice(int x, int y, int width, int height, int scale, String ID) {
+	public Ice(float x, float y, float width, float height, float scale, String ID) {
 		super(x, y, width, height, scale, ID);
-		ice = ImageLoader.getSpriteSheet(ImageLoader.BLOCK_SPRITESHEET).getSubimage(width * 4, 0, width, height);
+		ice = ImageLoader.getSpriteSheet(ImageLoader.BLOCK_SPRITESHEET).getSubimage((int)width * 4, 0, (int)width, (int)height);
 	}
 	
 	public void tick(LinkedList<GameObject> gameObjects) {
@@ -21,6 +21,6 @@ public class Ice extends GameObject {
 	}
 	
 	public void render(Graphics g) {
-		g.drawImage(ice, x, y, scaledWidth, scaledHeight, null);
+		g.drawImage(ice, (int)x, (int)y, (int)scaledWidth, (int)scaledHeight, null);
 	}
 }

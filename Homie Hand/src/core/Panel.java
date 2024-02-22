@@ -33,7 +33,6 @@ public class Panel extends JPanel implements Runnable {
 	private MainMenu mainMenu;
 	private SettingsMenu settingsMenu;
 	private boolean FPSChanged;
-	public static Camera camera;
 	
 	public Panel() {
 		TICKS = 200;
@@ -63,7 +62,6 @@ public class Panel extends JPanel implements Runnable {
 		smallPlayer = new SmallPlayer(400, 200, Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, 2, "SmallPlayer");
 		gameObjectHandler.addGameObject(bigPlayer);
 		gameObjectHandler.addGameObject(smallPlayer);
-		camera = new Camera(0, 0);
 		gameObjectHandler.addGameObject(bigPlayer.getHammer());
 		mainMenu = new MainMenu(this);
 		settingsMenu = new SettingsMenu(this);

@@ -26,14 +26,14 @@ public class AnimationLoader {
 		return animationIndex;
 	}
 	
-	public void loadAnimations(int r, int c, int width, int height, String filePath) {
+	public void loadAnimations(int r, int c, float width, float height, String filePath) {
 		numColumes = c;
 		BufferedImage image = ImageLoader.getSpriteSheet(filePath);
 		
 		animations = new BufferedImage[r][c];
 		for(int row = 0; row < animations.length; row++) {
 			for(int col = 0; col < animations[row].length; col++) {
-				animations[row][col] = image.getSubimage(col * width, row * height, width, height);
+				animations[row][col] = image.getSubimage(col * (int)width, row * (int)height, (int)width, (int)height);
 			}
 		}
 	}

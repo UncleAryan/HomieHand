@@ -19,12 +19,12 @@ public class SmallPlayer extends GameObject {
 	 * 3 = jumping left
 	 */
 	private int action;
-	private int gravity;
+	private float gravity;
 	private boolean jumping;
-	private int MAX_JUMP;
-	private int jumpSpeed;
+	private float MAX_JUMP;
+	private float jumpSpeed;
 	
-	public SmallPlayer(int x, int y, int width, int height, int scale, String ID) {
+	public SmallPlayer(float x, float y, float width, float height, float scale, String ID) {
 		super(x, y, width, height, scale, ID);
 		animationLoader = new AnimationLoader(30);
 		action = 1; 
@@ -37,7 +37,7 @@ public class SmallPlayer extends GameObject {
 	}
 
 	public void render(Graphics g) {
-		g.drawImage(animationLoader.getAnimations()[action][animationLoader.getAnimationIndex()], x, y, scaledWidth, scaledHeight, null);
+		g.drawImage(animationLoader.getAnimations()[action][animationLoader.getAnimationIndex()], (int)x, (int)y, (int)scaledWidth, (int)scaledHeight, null);
 	}
 
 	public void tick(LinkedList<GameObject> gameObjects) {

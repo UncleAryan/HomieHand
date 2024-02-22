@@ -17,11 +17,11 @@ public class BigPlayer extends GameObject {
 	 * 3 = walking left
 	 */
 	private int action;
-	private int gravity;
+	private float gravity;
 	private AnimationLoader animationLoader;
 	private Hammer hammer;
 	
-	public BigPlayer(int x, int y, int width, int height, int scale, String ID) {
+	public BigPlayer(float x, float y, float width, float height, float scale, String ID) {
 		super(x, y, width, height, scale, ID);
 		animationLoader = new AnimationLoader(25);
 		action = 0; // starts off facing right idle
@@ -49,7 +49,7 @@ public class BigPlayer extends GameObject {
 	}
 	
 	public void render(Graphics g) {
-		g.drawImage(animationLoader.getAnimations()[action][animationLoader.getAnimationIndex()], x, y, scaledWidth, scaledHeight, null);
+		g.drawImage(animationLoader.getAnimations()[action][animationLoader.getAnimationIndex()], (int)x, (int)y, (int)scaledWidth, (int)scaledHeight, null);
 		
 		hammer.render(g);
 	}

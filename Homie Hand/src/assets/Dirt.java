@@ -12,9 +12,9 @@ public class Dirt extends GameObject {
 	// r = 64, g = 64, g = 64
 	private BufferedImage dirt;
 	
-	public Dirt(int x, int y, int width, int height, int scale, String ID) {
+	public Dirt(float x, float y, float width, float height, float scale, String ID) {
 		super(x, y, width, height, scale, ID);
-		dirt = ImageLoader.getSpriteSheet(ImageLoader.BLOCK_SPRITESHEET).getSubimage(Constants.DEFAULT_GAMEOBJECT_WIDTH * 1, 0, width, height);
+		dirt = ImageLoader.getSpriteSheet(ImageLoader.BLOCK_SPRITESHEET).getSubimage(Constants.DEFAULT_GAMEOBJECT_WIDTH * 1, 0, (int)width, (int)height);
 	}
 	
 	public void tick(LinkedList<GameObject> gameObjects) {
@@ -22,6 +22,6 @@ public class Dirt extends GameObject {
 	}
 	
 	public void render(Graphics g) {
-		g.drawImage(dirt, x, y, scaledWidth, scaledHeight, null);
+		g.drawImage(dirt, (int)x, (int)y, (int)scaledWidth, (int)scaledHeight, null);
 	}
 }

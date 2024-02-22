@@ -11,9 +11,9 @@ public class Stone extends GameObject {
 	// r = 0, g = 51, b = 0
 	private BufferedImage stone;
 	
-	public Stone(int x, int y, int width, int height, int scale, String ID) {
+	public Stone(float x, float y, float width, float height, float scale, String ID) {
 		super(x, y, width, height, scale, ID);
-		stone = ImageLoader.getSpriteSheet(ImageLoader.BLOCK_SPRITESHEET).getSubimage(width * 2, 0, width, height);
+		stone = ImageLoader.getSpriteSheet(ImageLoader.BLOCK_SPRITESHEET).getSubimage((int)width * 2, 0, (int)width, (int)height);
 	}
 	
 	public void tick(LinkedList<GameObject> gameObjects) {
@@ -21,6 +21,6 @@ public class Stone extends GameObject {
 	}
 	
 	public void render(Graphics g) {
-		g.drawImage(stone, x, y, scaledWidth, scaledHeight, null);
+		g.drawImage(stone, (int)x, (int)y, (int)scaledWidth, (int)scaledHeight, null);
 	}
 }
