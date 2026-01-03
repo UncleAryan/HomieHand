@@ -1,14 +1,15 @@
 package assets;
 
 import framework.Constants;
+import framework.EntityType;
 import framework.GameObject;
 
 import java.awt.*;
 import java.util.LinkedList;
 
 public class Background extends GameObject {
-	public Background(int x, int y, int width, int height, int scale, String ID) {
-		super(x, y, width, height, scale, ID);
+	public Background(int x, int y, int width, int height, int scale, EntityType entityType) {
+		super(x, y, width, height, scale, entityType);
 		xSpeed = -1;	
 	}
 

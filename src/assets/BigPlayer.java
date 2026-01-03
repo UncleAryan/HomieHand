@@ -1,33 +1,24 @@
 package assets;
 
-import framework.AnimationLoader;
-import framework.CollisionHandler;
-import framework.GameObject;
-import framework.ImageLoader;
+import framework.*;
 
 import java.awt.*;
 import java.util.LinkedList;
 
 public class BigPlayer extends GameObject {
 	// r = 255, g = 255, b = 255
-	/*
-	 * 0 = idle right
-	 * 1 = idle left
-	 * 2 = walking right
-	 * 3 = walking left
-	 */
-	private int action;
+
 	private float gravity;
 	private AnimationLoader animationLoader;
 	private Hammer hammer;
 	
-	public BigPlayer(float x, float y, float width, float height, float scale, String ID) {
-		super(x, y, width, height, scale, ID);
+	public BigPlayer(float x, float y, float width, float height, float scale, EntityType entityType) {
+		super(x, y, width, height, scale, entityType);
 		animationLoader = new AnimationLoader(25);
-		action = 0; // starts off facing right idle
+		entityState = EntityState.IDLE_RIGHT;
 		gravity = 1;
 		animationLoader.loadAnimations(4, 9, originalWidth, originalHeight, ImageLoader.BIGPLAYER_SPRITESHEET);
-		hammer = new Hammer(x, y, width, height, 2, "Hammer", this);
+		hammer = new Hammer(x, y, width, height, 2, EntityType.HAMMER, this);
 	}
 	
 	public void tick(LinkedList<GameObject> gameObjects) {
@@ -45,19 +36,29 @@ public class BigPlayer extends GameObject {
 		}
 		
 		animationLoader.tickAnimation();
+
 		CollisionHandler.tick(gameObjects, this);
 	}
 	
 	public void render(Graphics g) {
-		g.drawImage(animationLoader.getAnimations()[action][animationLoader.getAnimationIndex()], (int)x, (int)y, (int)scaledWidth, (int)scaledHeight, null);
+		g.drawImage(animationLoader.getAnimations()[getAction()][animationLoader.getAnimationIndex()], (int)x, (int)y, (int)scaledWidth, (int)scaledHeight, null);
 		
 		hammer.render(g);
 	}
-	
-	public void setAction(int action) {
-		this.action = action;
+
+	public int getAction() {
+		if (entityState == EntityState.IDLE_RIGHT) {
+			return 0;
+		} else if (entityState == EntityState.IDLE_LEFT) {
+			return 1;
+		} else if (entityState == EntityState.WALKING_RIGHT) {
+			return 2;
+		} else if (entityState == EntityState.WALKING_LEFT){
+			return 3;
+		}
+		return -1;
 	}
-	
+
 	public AnimationLoader getAnimationLoader() {
 		return animationLoader;
 	}
@@ -65,9 +66,4 @@ public class BigPlayer extends GameObject {
 	public Hammer getHammer() {
 		return hammer;
 	}
-	
-	public int getAction() {
-		return action;
-	}
-
 }

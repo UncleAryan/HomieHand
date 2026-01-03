@@ -9,13 +9,14 @@ public abstract class GameObject {
 	protected float originalWidth, originalHeight;
 	protected float scaledWidth, scaledHeight;
 	protected float scale;
-	protected String ID;
 	protected Rectangle bounds;
 	protected boolean onGround;
 	protected boolean hammerWithBigPlayer;
 	protected boolean canThrowHammer;
+	protected EntityType entityType;
+	protected EntityState entityState;
 	
-	public GameObject(float x, float y, float width, float height, float scale, String ID) {
+	public GameObject(float x, float y, float width, float height, float scale, EntityType entityType) {
 		this.x = x;
 		this.y = y;
 		originalWidth = width;
@@ -23,7 +24,7 @@ public abstract class GameObject {
 		this.scale = scale;
 		scaledWidth = width * scale;
 		scaledHeight = height * scale;
-		this.ID = ID;
+		this.entityType = entityType;
 		bounds = new Rectangle((int)x, (int)y, (int)scaledWidth, (int)scaledHeight);
 		onGround = false;
 		canThrowHammer = true;
@@ -92,9 +93,12 @@ public abstract class GameObject {
 		this.y = y;
 		updateBounds();
 	}
-	
-	public String getID() {
-		return ID;
+
+	public EntityType getEntityType() {
+		return entityType;
+	}
+	public void setEntityType(EntityType entityType) {
+		this.entityType = entityType;
 	}
 	public void setXSpeed(float speed) {
 		xSpeed = speed;
@@ -122,5 +126,12 @@ public abstract class GameObject {
 	}
 	public boolean canThrowHammer() {
 		return canThrowHammer;
+	}
+
+	public EntityState getEntityState() {
+		return entityState;
+	}
+	public void setEntityState(EntityState entityState) {
+		this.entityState = entityState;
 	}
 }

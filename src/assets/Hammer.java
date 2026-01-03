@@ -1,9 +1,6 @@
 package assets;
 
-import framework.CollisionHandler;
-import framework.Constants;
-import framework.GameObject;
-import framework.ImageLoader;
+import framework.*;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -20,8 +17,8 @@ public class Hammer extends GameObject {
 	private boolean throwHammer;
 	private double spinDirection;
 	
-	public Hammer(float x, float y, float width, float height, float scale, String ID, BigPlayer bigPlayer) {
-		super(x, y, width, height, scale, ID);
+	public Hammer(float x, float y, float width, float height, float scale, EntityType entityType, BigPlayer bigPlayer) {
+		super(x, y, width, height, scale, entityType);
 		hammer = ImageLoader.getSpriteSheet(ImageLoader.HAMMER);
 		angle = 45;
 		this.bigPlayer = bigPlayer;
@@ -67,7 +64,7 @@ public class Hammer extends GameObject {
 		x = bigPlayer.getX() + bigPlayer.getScaledWidth()/4;
 		y = bigPlayer.getY() + bigPlayer.getScaledHeight()/3;
 		
-		if(bigPlayer.getAction() == 0 || bigPlayer.getAction() == 2) {
+		if(bigPlayer.getEntityState() == EntityState.IDLE_RIGHT || bigPlayer.getEntityState() == EntityState.WALKING_RIGHT) {
 			angle = 45;
 			xSpeed = 3;
 			spinDirection = 1;

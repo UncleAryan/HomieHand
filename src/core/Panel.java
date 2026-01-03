@@ -3,10 +3,7 @@ package core;
 import assets.Background;
 import assets.BigPlayer;
 import assets.SmallPlayer;
-import framework.Constants;
-import framework.GameObjectHandler;
-import framework.GameState;
-import framework.LevelHandler;
+import framework.*;
 import inputs.KeyInput;
 import inputs.MouseInput;
 
@@ -50,10 +47,10 @@ public class Panel extends JPanel implements Runnable {
 		add(performanceStat);
 		performanceStat.setVisible(false);
 		gameObjectHandler = new GameObjectHandler();
-		gameObjectHandler.addGameObject(new Background(0, 0, (int)Constants.WIDTH, (int)Constants.HEIGHT, 1, "Background"));
+		gameObjectHandler.addGameObject(new Background(0, 0, (int)Constants.WIDTH, (int)Constants.HEIGHT, 1, EntityType.BACKGROUND));
 		levelHandler = new LevelHandler(this);
-		bigPlayer = new BigPlayer(0, 0, Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, 4, "BigPlayer");
-		smallPlayer = new SmallPlayer(bigPlayer.getX()+ bigPlayer.getScaledWidth()+32, 0, Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, 2, "SmallPlayer");
+		bigPlayer = new BigPlayer(0, 0, Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, 4, EntityType.BIG_PLAYER);
+		smallPlayer = new SmallPlayer(bigPlayer.getX()+ bigPlayer.getScaledWidth()+32, 0, Constants.DEFAULT_GAMEOBJECT_WIDTH, Constants.DEFAULT_GAMEOBJECT_HEIGHT, 2, EntityType.SMALL_PLAYER);
 		bigPlayer.setY((Constants.HEIGHT-(2*Constants.DEFAULT_GAMEOBJECT_HEIGHT))-bigPlayer.getScaledHeight());
 		smallPlayer.setY((Constants.HEIGHT-(2*Constants.DEFAULT_GAMEOBJECT_HEIGHT))-smallPlayer.getScaledHeight());
 		gameObjectHandler.addGameObject(bigPlayer);

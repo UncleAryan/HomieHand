@@ -1,5 +1,6 @@
 package assets;
 
+import framework.EntityType;
 import framework.GameObject;
 import framework.ImageLoader;
 
@@ -11,8 +12,8 @@ public class Ice extends GameObject {
 	// r = 0, g = 0, b = 51
 	private BufferedImage ice;
 	
-	public Ice(float x, float y, float width, float height, float scale, String ID) {
-		super(x, y, width, height, scale, ID);
+	public Ice(float x, float y, float width, float height, float scale, EntityType entityType) {
+		super(x, y, width, height, scale, entityType);
 		ice = ImageLoader.getSpriteSheet(ImageLoader.BLOCK_SPRITESHEET).getSubimage((int)width * 4, 0, (int)width, (int)height);
 	}
 	

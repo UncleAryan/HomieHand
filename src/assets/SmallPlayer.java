@@ -1,9 +1,6 @@
 package assets;
 
-import framework.AnimationLoader;
-import framework.CollisionHandler;
-import framework.GameObject;
-import framework.ImageLoader;
+import framework.*;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -26,8 +23,8 @@ public class SmallPlayer extends GameObject {
 	private float MAX_JUMP;
 	private float jumpSpeed;
 	
-	public SmallPlayer(float x, float y, float width, float height, float scale, String ID) {
-		super(x, y, width, height, scale, ID);
+	public SmallPlayer(float x, float y, float width, float height, float scale, EntityType entityType) {
+		super(x, y, width, height, scale, entityType);
 		animationLoader = new AnimationLoader(30);
 		action = 1; 
 		gravity = 1;
@@ -63,7 +60,7 @@ public class SmallPlayer extends GameObject {
 	
 	public void faceBigPlayer(LinkedList<GameObject> gameObjects) {
 		for(int i = 0; i < gameObjects.size(); i++) {
-			if(gameObjects.get(i).getID().equals("BigPlayer")) {
+			if(gameObjects.get(i).getEntityType() == EntityType.BIG_PLAYER) {
 				if(gameObjects.get(i).getX() < x) {
 					action = 1;
 				}

@@ -2,6 +2,7 @@ package inputs;
 
 import core.Panel;
 import framework.Constants;
+import framework.EntityState;
 import framework.GameState;
 
 import java.awt.event.KeyEvent;
@@ -42,12 +43,12 @@ public class KeyInput implements KeyListener {
 		case PLAY:
 			if(e.getKeyCode() == KeyEvent.VK_A) {
 				movingRight = false;
-				panel.getBigPlayer().setAction(3);
+				panel.getBigPlayer().setEntityState(EntityState.WALKING_LEFT);
 				panel.getBigPlayer().setXSpeed(-Constants.BIGPLAYER_XSPEED);
 			}
 			if(e.getKeyCode() == KeyEvent.VK_D) {
 				movingRight = true;
-				panel.getBigPlayer().setAction(2);
+				panel.getBigPlayer().setEntityState(EntityState.WALKING_RIGHT);
 				panel.getBigPlayer().setXSpeed(Constants.BIGPLAYER_XSPEED);
 			}
 			if(e.getKeyCode() == KeyEvent.VK_SPACE && !panel.getSmallPlayer().isJumping()) {
@@ -67,17 +68,16 @@ public class KeyInput implements KeyListener {
 			break;
 		default:
 			break;
-		
 		}
 	}
 
 	public void keyReleased(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_A && !movingRight) {
-			panel.getBigPlayer().setAction(1);
+			panel.getBigPlayer().setEntityState(EntityState.IDLE_LEFT);
 			panel.getBigPlayer().setXSpeed(0);
 		}
 		if(e.getKeyCode() == KeyEvent.VK_D && movingRight) {
-			panel.getBigPlayer().setAction(0);
+			panel.getBigPlayer().setEntityState(EntityState.WALKING_RIGHT);
 			panel.getBigPlayer().setXSpeed(0);
 		}
 	}
