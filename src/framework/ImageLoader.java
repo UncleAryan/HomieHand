@@ -22,6 +22,7 @@ public class ImageLoader {
 	public static final String ICE_BLOCK = "ice.png";
 	public static final String LAVA_BLOCK = "lava.png";
 	public static final String STONE_BLOCK = "stone.png";
+	public static final String BUTTON = "button.png";
 	
 	public static BufferedImage getSpriteSheet(String file) {
 		BufferedImage image = null;

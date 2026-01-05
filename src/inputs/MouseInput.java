@@ -17,6 +17,14 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 		mouseY = 0;
 	}
 
+	public int getMouseX() {
+		return mouseX;
+	}
+
+	public int getMouseY() {
+		return mouseY;
+	}
+
 	public void mouseDragged(MouseEvent e) {
 		updateMousePosition(e);
 	}

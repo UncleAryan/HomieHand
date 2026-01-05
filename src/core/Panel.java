@@ -6,6 +6,7 @@ import assets.SmallPlayer;
 import framework.*;
 import inputs.KeyInput;
 import inputs.MouseInput;
+import ui.MainMenu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -167,6 +168,10 @@ public class Panel extends JPanel implements Runnable {
 	    mouseInput = new MouseInput(this);
 		addMouseListener(mouseInput);
 		addMouseMotionListener(mouseInput);
+	}
+
+	public MouseInput getMouseInput() {
+		return mouseInput;
 	}
 	
 	private void setSize() {
