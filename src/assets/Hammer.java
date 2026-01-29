@@ -25,17 +25,23 @@ public class Hammer extends GameObject {
 		throwHammer = false;
 		spinDirection = 1;
 		hammerWithBigPlayer = true;
-		this.x = bigPlayer.getX() + bigPlayer.getScaledWidth()/4;
-		this.y = bigPlayer.getY() + bigPlayer.getScaledHeight()/3;
+
+		// my attempt to calculate relative position based on BigPlayer's dimensions
+		float offsetX = bigPlayer.getScaledWidth() * 0.25f;
+		float offsetY = bigPlayer.getScaledHeight() * 0.33f;
+
+		this.x = bigPlayer.getX() + offsetX;
+		this.y = bigPlayer.getY() + offsetY;
 	}
 
 	public void render(Graphics g) {
 		g2d = (Graphics2D) g;
-		resetImage = g2d.getTransform();
-	    rotatedImageInstance = AffineTransform.getRotateInstance(angle, x + scaledWidth/2, y + scaledHeight/2);
-	    g2d.setTransform(rotatedImageInstance);
-	    g2d.drawImage(hammer, (int)x, (int)y, (int)scaledWidth, (int)scaledHeight, null);
-	    g2d.setTransform(resetImage);
+		AffineTransform originalTransform = g2d.getTransform();
+		g2d.translate(x + scaledWidth/2, y + scaledHeight/2);
+		g2d.rotate(angle);
+		g2d.translate(-scaledWidth/2, -scaledHeight/2);
+		g2d.drawImage(hammer, 0, 0, (int)scaledWidth, (int)scaledHeight, null);
+		g2d.setTransform(originalTransform);
 	}
 	
 	public void tick(LinkedList<GameObject> gameObjects) {
@@ -61,8 +67,11 @@ public class Hammer extends GameObject {
 	}
 	
 	public void updatePosition() {
-		x = bigPlayer.getX() + bigPlayer.getScaledWidth()/4;
-		y = bigPlayer.getY() + bigPlayer.getScaledHeight()/3;
+		float offsetX = bigPlayer.getScaledWidth() * 0.25f;
+		float offsetY = bigPlayer.getScaledHeight() * 0.33f;
+
+		x = bigPlayer.getX() + offsetX;
+		y = bigPlayer.getY() + offsetY;
 		
 		if(bigPlayer.getEntityState() == EntityState.IDLE_RIGHT || bigPlayer.getEntityState() == EntityState.WALKING_RIGHT) {
 			angle = 45;
