@@ -2,6 +2,8 @@ package inputs;
 
 import core.Panel;
 import framework.GameState;
+import ui.Button;
+import ui.UIType;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -38,6 +40,14 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 		
 		switch(GameState.state) {
 		case MENU:
+			Button button = panel.getMainMenu().getButtonHandler().getHoveringOver();
+			if (button.getType() == UIType.START_BUTTON) {
+				GameState.state = GameState.PLAY;
+			} else if (button.getType() == UIType.SETTINGS_BUTTON) {
+				GameState.state = GameState.SETTINGS;
+			} else if (button.getType() == UIType.EXIT_BUTTON) {
+				System.exit(0);
+			}
 			break;
 		case PAUSE:
 			break;

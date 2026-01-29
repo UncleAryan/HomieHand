@@ -59,4 +59,8 @@ public class ButtonHandler {
             pointer.render(g, hoveringOver);
         }
     }
+
+    public Button getHoveringOver() {
+        return hoveringOver;
+    }
 }

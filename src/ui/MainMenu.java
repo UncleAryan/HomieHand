@@ -151,4 +151,8 @@ public class MainMenu {
 	    g.drawImage(panel.getSmallPlayer().getAnimationLoader().getAnimations()[1][panel.getSmallPlayer().getAnimationLoader().getAnimationIndex()],
 	    		(int)smallPlayerX, (int)smallPlayerY, (int)scaledSmallPlayerWidth, (int)scaledSmallPlayerHeight, null);
 	}
+
+	public ButtonHandler getButtonHandler() {
+		return buttonHandler;
+	}
 }

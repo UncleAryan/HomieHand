@@ -20,23 +20,6 @@ public class KeyInput implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		switch(GameState.state) {
 		case MENU:
-			if(e.getKeyCode() == KeyEvent.VK_UP) {
-				panel.getMainMenu().movePointerUp();
-			}
-			if(e.getKeyCode() == KeyEvent.VK_DOWN) {
-				panel.getMainMenu().movePointerDown();
-			}
-			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-				if(panel.getMainMenu().getPointerPointing().equals("START")) {
-					GameState.state = GameState.PLAY;
-				}
-				if(panel.getMainMenu().getPointerPointing().equals("SETTINGS")) {
-					GameState.state = GameState.SETTINGS;
-				}
-				if(panel.getMainMenu().getPointerPointing().equals("EXIT")) {
-					System.exit(0);
-				}
-			}
 			break;
 		case PAUSE:
 			break;
@@ -77,7 +60,7 @@ public class KeyInput implements KeyListener {
 			panel.getBigPlayer().setXSpeed(0);
 		}
 		if(e.getKeyCode() == KeyEvent.VK_D && movingRight) {
-			panel.getBigPlayer().setEntityState(EntityState.WALKING_RIGHT);
+			panel.getBigPlayer().setEntityState(EntityState.IDLE_RIGHT);
 			panel.getBigPlayer().setXSpeed(0);
 		}
 	}
