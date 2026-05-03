@@ -16,15 +16,15 @@ public class BigPlayer extends GameObject {
 		super(x, y, width, height, scale, entityType);
 		animationLoader = new AnimationLoader(25);
 		entityState = EntityState.IDLE_RIGHT;
-		gravity = 1;
+		gravity = Constants.GRAVITY;
 		animationLoader.loadAnimations(4, 9, originalWidth, originalHeight, ImageLoader.BIGPLAYER_SPRITESHEET);
 		hammer = new Hammer(x, y, width, height, 2, EntityType.HAMMER, this);
 	}
 	
 	public void tick(LinkedList<GameObject> gameObjects) {
 		x += xSpeed;
+		ySpeed += gravity;
 		y += ySpeed;
-		ySpeed = gravity;
 		
 		hammer.tick(gameObjects);
 		

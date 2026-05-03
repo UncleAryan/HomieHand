@@ -58,6 +58,10 @@ public abstract class GameObject {
 	public abstract void render(Graphics g);
 	public abstract void tick(LinkedList<GameObject> gameObjects);
 
+	public void onLand() { }
+
+	public void applyKnockback(float xSpeed, float ySpeed) { }
+
 	public void showBoundsOutline(Graphics g) {
 		g.setColor(Color.BLUE);
 		g.drawRect((int)x, (int)y, (int)scaledWidth, (int)scaledHeight);
@@ -66,7 +70,7 @@ public abstract class GameObject {
 	public float getOriginalWidth() {
 		return originalWidth;
 	}
-	public float getOrignialHeight() {
+	public float getOriginalHeight() {
 		return originalHeight;
 	}
 	public float getScaledWidth() {

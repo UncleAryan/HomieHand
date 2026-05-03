@@ -20,15 +20,14 @@ public class Hammer extends GameObject {
 	public Hammer(float x, float y, float width, float height, float scale, EntityType entityType, BigPlayer bigPlayer) {
 		super(x, y, width, height, scale, entityType);
 		hammer = ImageLoader.getSpriteSheet(ImageLoader.HAMMER);
-		angle = 45;
+		angle = Constants.HAMMER_IDLE_ANGLE;
 		this.bigPlayer = bigPlayer;
 		throwHammer = false;
 		spinDirection = 1;
 		hammerWithBigPlayer = true;
 
-		// my attempt to calculate relative position based on BigPlayer's dimensions
-		float offsetX = bigPlayer.getScaledWidth() * 0.25f;
-		float offsetY = bigPlayer.getScaledHeight() * 0.33f;
+		float offsetX = bigPlayer.getScaledWidth()  * Constants.HAMMER_OFFSET_X;
+		float offsetY = bigPlayer.getScaledHeight() * Constants.HAMMER_OFFSET_Y;
 
 		this.x = bigPlayer.getX() + offsetX;
 		this.y = bigPlayer.getY() + offsetY;
@@ -46,12 +45,12 @@ public class Hammer extends GameObject {
 	
 	public void tick(LinkedList<GameObject> gameObjects) {
 		if(throwHammer) {
-			angle += 0.05 * spinDirection;
-			
+			angle += Constants.HAMMER_SPIN_SPEED * spinDirection;
+
 			x += xSpeed;
 			y += ySpeed;
-			
-			ySpeed = -1;
+
+			ySpeed = Constants.HAMMER_FLOAT_SPEED;
 		} else {
 			updatePosition();
 		}
@@ -67,19 +66,19 @@ public class Hammer extends GameObject {
 	}
 	
 	public void updatePosition() {
-		float offsetX = bigPlayer.getScaledWidth() * 0.25f;
-		float offsetY = bigPlayer.getScaledHeight() * 0.33f;
+		float offsetX = bigPlayer.getScaledWidth()  * Constants.HAMMER_OFFSET_X;
+		float offsetY = bigPlayer.getScaledHeight() * Constants.HAMMER_OFFSET_Y;
 
 		x = bigPlayer.getX() + offsetX;
 		y = bigPlayer.getY() + offsetY;
-		
-		if(bigPlayer.getEntityState() == EntityState.IDLE_RIGHT || bigPlayer.getEntityState() == EntityState.WALKING_RIGHT) {
-			angle = 45;
-			xSpeed = 3;
+
+		if (bigPlayer.getEntityState() == EntityState.IDLE_RIGHT || bigPlayer.getEntityState() == EntityState.WALKING_RIGHT) {
+			angle = Constants.HAMMER_IDLE_ANGLE;
+			xSpeed = Constants.HAMMER_THROW_SPEED;
 			spinDirection = 1;
 		} else {
-			angle = -45;
-			xSpeed = -3;
+			angle = -Constants.HAMMER_IDLE_ANGLE;
+			xSpeed = -Constants.HAMMER_THROW_SPEED;
 			spinDirection = -1;
 		}
 	}

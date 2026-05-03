@@ -4,23 +4,23 @@ import java.util.LinkedList;
 
 /*
  * Will handle all collisions in game.
+ * Algorithm based on RedFlyer Coding (YouTube).
  */
 public class CollisionHandler {
 
-	/*
-	 * Collision handling algorithm implemented here was shown by RedFlyer Coding on
-	 * YouTube.
-	 */
 	public static void tick(LinkedList<GameObject> gameObjects, GameObject objectColliding) {
-		// horizontal collision
+		// Horizontal collision
 		objectColliding.getBounds().x += objectColliding.getXSpeed();
 		for (int i = 0; i < gameObjects.size(); i++) {
-			// blocks to player collision
-			if (gameObjects.get(i).getEntityType() == EntityType.BLOCK
-					&& objectColliding.getBounds().intersects(gameObjects.get(i).getBounds())
-					&& (objectColliding.getEntityType() == EntityType.BIG_PLAYER || objectColliding.getEntityType() == EntityType.SMALL_PLAYER)) {
+			GameObject other = gameObjects.get(i);
+
+			// Block stops players and hammer
+			if (other.getEntityType() == EntityType.BLOCK
+					&& objectColliding.getBounds().intersects(other.getBounds())
+					&& (objectColliding.getEntityType() == EntityType.BIG_PLAYER
+					 || objectColliding.getEntityType() == EntityType.SMALL_PLAYER)) {
 				objectColliding.getBounds().x -= objectColliding.getXSpeed();
-				while (!gameObjects.get(i).getBounds().intersects(objectColliding.getBounds())) {
+				while (!other.getBounds().intersects(objectColliding.getBounds())) {
 					objectColliding.getBounds().x += Math.signum(objectColliding.getXSpeed());
 				}
 				objectColliding.getBounds().x -= Math.signum(objectColliding.getXSpeed());
@@ -28,48 +28,39 @@ public class CollisionHandler {
 				objectColliding.setX(objectColliding.getBounds().x);
 			}
 
-			// hammer cannot throw if big player and small player are interacting
-			if (gameObjects.get(i).getEntityType() == EntityType.BIG_PLAYER && objectColliding.getEntityType() == EntityType.SMALL_PLAYER) {
-				if(objectColliding.getBounds().intersects(gameObjects.get(i).getBounds())){
-					gameObjects.get(i).setCanThrowHammer(false);
-				} else {
-					gameObjects.get(i).setCanThrowHammer(true);
-				}
+			// BigPlayer cannot throw hammer while touching SmallPlayer
+			if (other.getEntityType() == EntityType.BIG_PLAYER
+					&& objectColliding.getEntityType() == EntityType.SMALL_PLAYER) {
+				other.setCanThrowHammer(!objectColliding.getBounds().intersects(other.getBounds()));
 			}
 
-			// hammer to small player collision
-			if (gameObjects.get(i).getEntityType() == EntityType.SMALL_PLAYER && objectColliding.getEntityType() == EntityType.HAMMER &&
-				!objectColliding.hammerWithBigPlayer) {
-
-				if(objectColliding.getBounds().intersects(gameObjects.get(i).getBounds())) {
-					if(objectColliding.getXSpeed() > 0) {
-						gameObjects.get(i).setXSpeed(3);
-						gameObjects.get(i).setYSpeed(-2);
-					} else {
-						gameObjects.get(i).setXSpeed(-3);
-						gameObjects.get(i).setYSpeed(-2);
-					}
+			// knockback direction to the smallplayer
+			if (other.getEntityType() == EntityType.SMALL_PLAYER
+					&& objectColliding.getEntityType() == EntityType.HAMMER
+					&& !objectColliding.hammerWithBigPlayer) {
+				if (objectColliding.getBounds().intersects(other.getBounds())) {
+					float direction = objectColliding.getXSpeed() > 0 ? Constants.KNOCKBACK_X : -Constants.KNOCKBACK_X;
+					other.applyKnockback(direction, Constants.KNOCKBACK_Y);
 				} else {
-					gameObjects.get(i).setXSpeed(0);
+					other.setXSpeed(0);
 				}
 			}
 		}
 
-		// vertical collision
+		// Vertical collision
 		objectColliding.getBounds().y += objectColliding.getYSpeed();
 		for (int i = 0; i < gameObjects.size(); i++) {
-			// block to players
-			if (gameObjects.get(i).getEntityType() == EntityType.BLOCK
-			 && objectColliding.getBounds().intersects(gameObjects.get(i).getBounds())
-			&& (objectColliding.getEntityType() == EntityType.BIG_PLAYER || objectColliding.getEntityType() == EntityType.SMALL_PLAYER)) {
+			GameObject other = gameObjects.get(i);
+
+			if (other.getEntityType() == EntityType.BLOCK
+					&& objectColliding.getBounds().intersects(other.getBounds())
+					&& (objectColliding.getEntityType() == EntityType.BIG_PLAYER
+					 || objectColliding.getEntityType() == EntityType.SMALL_PLAYER)) {
 				objectColliding.getBounds().y -= objectColliding.getYSpeed();
-				while (!gameObjects.get(i).getBounds().intersects(objectColliding.getBounds())) {
+				while (!other.getBounds().intersects(objectColliding.getBounds())) {
 					objectColliding.getBounds().y += Math.signum(objectColliding.getYSpeed());
-					if(objectColliding.getEntityType() == EntityType.SMALL_PLAYER) {
-						objectColliding.setOnGround(true);
-					}
+					objectColliding.onLand();
 				}
-				
 				objectColliding.getBounds().y -= Math.signum(objectColliding.getYSpeed());
 				objectColliding.setYSpeed(0);
 				objectColliding.setY(objectColliding.getBounds().y);
