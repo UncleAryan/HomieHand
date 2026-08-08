@@ -1,0 +1,35 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Build jar
+        run: |
+          javac -d out $(find src -name '*.java')
+          jar --create --file HomieHand.jar --main-class core.Main -C out . -C res .
+
+      - name: Verify jar runs
+        run: |
+          unzip -l HomieHand.jar | grep -q level1.png
+          unzip -l HomieHand.jar | grep -q core/Main.class
+
+      - uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: HomieHand.jar

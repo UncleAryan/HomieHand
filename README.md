@@ -14,7 +14,7 @@ it can't jump to on its own. Big Player can't throw while the two are touching.
 
 ## Play
 
-1. Download `HomieHand.jar` from the [latest release](https://github.com/UncleAryan/HomieHand/releases/latest) (To be implemented soon).
+1. Download `HomieHand.jar` from the [latest release](https://github.com/UncleAryan/HomieHand/releases/latest).
 2. Double-click it, or run:
 
 ```
