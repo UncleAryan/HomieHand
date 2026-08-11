@@ -1,6 +1,7 @@
 # Build output
 out/
 bin/
+docs/
 *.class
 *.jar
 
