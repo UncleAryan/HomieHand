@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 
 public class ImageLoader {
 	public static final String BIGPLAYER_SPRITESHEET = "big_player_animations.png";
@@ -23,23 +24,22 @@ public class ImageLoader {
 	public static final String LAVA_BLOCK = "lava.png";
 	public static final String STONE_BLOCK = "stone.png";
 	public static final String BUTTON = "button.png";
+
+	private static final HashMap<String, BufferedImage> CACHE = new HashMap<>();
 	
 	public static BufferedImage getSpriteSheet(String file) {
-		BufferedImage image = null;
-		InputStream inputStream = ImageLoader.class.getResourceAsStream("/" + file);
-		try {
-			image = ImageIO.read(inputStream);
-			
-		} catch(IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				inputStream.close();
-			} catch(IOException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return image;
+		return CACHE.computeIfAbsent(file, f -> loadFromDisk(f));
 	}
+
+	private static BufferedImage loadFromDisk(String file) {
+		try (InputStream inputStream = ImageLoader.class.getResourceAsStream("/" + file)) {
+			if (inputStream == null) {
+				throw new IllegalStateException("Missing Resource: " + file);
+			}
+			return ImageIO.read(inputStream);
+		} catch (IOException e) {
+			throw new IllegalStateException("Cannot read resource" + file, e);
+		}
+	}
+
 }
