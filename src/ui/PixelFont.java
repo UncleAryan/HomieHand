@@ -275,6 +275,10 @@ public class PixelFont {
     private void drawCharacter(Graphics2D g, char c, int x, int y) {
         boolean[][] matrix = PIXEL_MATRIX.get(c);
 
+        if (matrix == null) {
+            return;
+        }
+
         int pixelWidth = Math.max(1, charWidth / 5);
         int pixelHeight = Math.max(1, charHeight / 5);
 
