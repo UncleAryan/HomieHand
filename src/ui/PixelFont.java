@@ -201,12 +201,12 @@ public class PixelFont {
                 {true, false, false, false, true}
         });
 
-        defineCharacter('X', new boolean[][]{
+        defineCharacter('Y', new boolean[][]{
                 {true, false, false, false, true},
                 {false, true, false, true, false},
                 {false, false, true, false, false},
-                {false, true, false, true, false},
-                {true, false, false, false, true}
+                {false, true, false, false, false},
+                {true, false, false, false, false}
         });
 
         defineCharacter('Z', new boolean[][]{
