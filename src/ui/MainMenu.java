@@ -29,7 +29,6 @@ public class MainMenu {
 		
 		loadImages();
 
-		pointerScale = 2;
 		buttonScale = 8;
 		bigPlayerScale = 4;
 		smallPlayerScale = 6;

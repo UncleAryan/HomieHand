@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 /*
  * Will handle all collisions in game.
- * Algorithm based on RedFlyer Coding (YouTube).
+ * Algorithm copied from RedFlyer Coding (YouTube).
  */
 public class CollisionHandler {
 
@@ -59,6 +59,8 @@ public class CollisionHandler {
 				objectColliding.getBounds().y -= objectColliding.getYSpeed();
 				while (!other.getBounds().intersects(objectColliding.getBounds())) {
 					objectColliding.getBounds().y += Math.signum(objectColliding.getYSpeed());
+				}
+				if (objectColliding.getYSpeed() > 0) {
 					objectColliding.onLand();
 				}
 				objectColliding.getBounds().y -= Math.signum(objectColliding.getYSpeed());
