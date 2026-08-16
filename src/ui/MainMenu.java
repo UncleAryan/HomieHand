@@ -56,9 +56,11 @@ public class MainMenu {
         Button start = new Button(centerXForAllButtons, startButtonY, Constants.DEFAULT_BUTTON_WIDTH, Constants.DEFAULT_BUTTON_HEIGHT, buttonScale, UIType.START_BUTTON);
         Button settings = new Button(centerXForAllButtons, settingsButtonY, Constants.DEFAULT_BUTTON_WIDTH, Constants.DEFAULT_BUTTON_HEIGHT, buttonScale, UIType.SETTINGS_BUTTON);
         Button exit = new Button(centerXForAllButtons, exitButtonY, Constants.DEFAULT_BUTTON_WIDTH, Constants.DEFAULT_BUTTON_HEIGHT, buttonScale, UIType.EXIT_BUTTON);
+		Button levelEditor = new Button(centerXForAllButtons / 3, exitButtonY, Constants.DEFAULT_BUTTON_WIDTH, Constants.DEFAULT_BUTTON_HEIGHT, buttonScale, UIType.LEVEL_EDITOR_BUTTON);
 		buttonHandler.addButton(start);
 		buttonHandler.addButton(settings);
 		buttonHandler.addButton(exit);
+		buttonHandler.addButton(levelEditor);
 	}
 	
 	public void render(Graphics g) {

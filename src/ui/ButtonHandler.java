@@ -4,8 +4,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class ButtonHandler {
-    private ArrayList<Button> buttons;
-    private Pointer pointer;
+    private final ArrayList<Button> buttons;
+    private final Pointer pointer;
     private Button hoveringOver, initialButton;
     private boolean hasSelected;
 
