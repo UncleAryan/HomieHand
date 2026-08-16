@@ -4,6 +4,7 @@ import core.Panel;
 import framework.GameState;
 import ui.Button;
 import ui.UIType;
+import core.LevelEditor;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -49,6 +50,8 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 				System.exit(0);
 			} else if (button.getType() == UIType.LEVEL_EDITOR_BUTTON) {
 				System.out.println("Level Editor Button was clicked!");
+				LevelEditor levelEditor = new LevelEditor();
+
 			}
 			break;
 		case PAUSE:

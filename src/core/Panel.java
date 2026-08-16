@@ -175,11 +175,7 @@ public class Panel extends JPanel implements Runnable {
 	}
 	
 	private void setSize() {
-		if(Constants.WIDTH == 1920 && Constants.HEIGHT == 1080) {
-			
-		}
 		setPreferredSize(new Dimension((int)Constants.WIDTH , (int)Constants.HEIGHT));
-		
 	}
 	
 	public BigPlayer getBigPlayer() {
