@@ -25,6 +25,7 @@ public class Panel extends JPanel implements Runnable {
 	private MainMenu mainMenu;
 	private SettingsMenu settingsMenu;
 	private boolean FPSChanged;
+	private LevelEditor levelEditor;
 	
 	public Panel() {
 		TICKS = 200;
@@ -208,5 +209,9 @@ public class Panel extends JPanel implements Runnable {
 	
 	public void FPSChanged(boolean value) {
 		FPSChanged = value;
+	}
+
+	public void initLevelEditor() {
+		levelEditor = new LevelEditor();
 	}
 }

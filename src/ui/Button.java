@@ -87,6 +87,7 @@ public class Button {
             case START_BUTTON: return "START";
             case SETTINGS_BUTTON: return "SETTINGS";
             case EXIT_BUTTON: return "EXIT";
+            case LEVEL_EDITOR_BUTTON: return "EDITOR";
             default: return "";
         }
     }

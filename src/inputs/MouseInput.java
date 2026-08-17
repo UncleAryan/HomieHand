@@ -49,9 +49,7 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 			} else if (button.getType() == UIType.EXIT_BUTTON) {
 				System.exit(0);
 			} else if (button.getType() == UIType.LEVEL_EDITOR_BUTTON) {
-				System.out.println("Level Editor Button was clicked!");
-				LevelEditor levelEditor = new LevelEditor();
-
+				panel.initLevelEditor();
 			}
 			break;
 		case PAUSE:
