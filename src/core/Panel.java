@@ -214,6 +214,8 @@ public class Panel extends JPanel implements Runnable {
 	}
 
 	public void initLevelEditor() {
-		levelEditor = new LevelEditor();
+		if(levelEditor == null) {
+			levelEditor = new LevelEditor();
+		}
 	}
 }
