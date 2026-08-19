@@ -9,17 +9,16 @@ import java.awt.image.BufferedImage;
 
 public class LevelEditor extends JPanel {
     private JFrame frame;
-    private JPanel panel;
     private BufferedImage level;
 
     public LevelEditor() {
-        loadWindow();
         loadLevel();
+        loadWindow();
+
     }
 
     private void loadLevel() {
         level = ImageLoader.getSpriteSheet(ImageLoader.LEVEL_ONE);
-
     }
 
     public void paintComponent(Graphics g) {
