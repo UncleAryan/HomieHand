@@ -10,8 +10,10 @@ import ui.MainMenu;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serial;
 
 public class Panel extends JPanel implements Runnable {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	private MouseInput mouseInput;
 	private int FPS;

@@ -16,7 +16,6 @@ public class LevelHandler {
 	private void loadLevel(BufferedImage level) {
 		for (int row = 0; row < level.getHeight(); row++) {
 			for (int col = 0; col < level.getWidth(); col++) {
-				// getRGB takes (x, y) — x is the column, y is the row
 				int pixel = level.getRGB(col, row);
 				int red   = (pixel >> 16) & 0xff;
 				int green = (pixel >> 8)  & 0xff;
